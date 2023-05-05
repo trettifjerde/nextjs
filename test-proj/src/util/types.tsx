@@ -3,5 +3,6 @@ export type EventInfo = {
     title: string,
     description: string,
     date: Date,
+    address: string,
     featured: boolean
 }

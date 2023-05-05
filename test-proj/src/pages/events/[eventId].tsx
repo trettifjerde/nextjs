@@ -1,17 +1,34 @@
-import EventComponent from "@/components/events/EvenItem";
-import { DUMMY_EVENTS } from "@/data/dummy_events";
+import EventContent from "@/components/event-details/event-content";
+import EventLogistics from "@/components/event-details/event-logistics";
+import EventSummary from "@/components/event-details/event-summary";
+import Button from "@/components/ui/button";
+import ErrorAlert from "@/components/ui/error-alert";
+import { getEventById } from "@/data/dummy_events";
 import { useRouter } from "next/router";
 
 function EventPage() {
     const router = useRouter();
-    console.log(router);
-    if ('eventId' in router.query) {
-        const event = DUMMY_EVENTS.find(event => event.id === router.query.eventId);
-        if (event)
-            return <EventComponent event={event} />
+    const eventId = router.query.eventId;
+    const event = getEventById(eventId);
+
+    if (!event) {
+        return <>
+            <ErrorAlert>No event found</ErrorAlert>
+            <div className="center"><Button href="/events">Back to all events</Button></div>
+        </>
     }
-    router.push('/');
-    return <></>
+    else {
+
+        return (
+            <>
+                <EventSummary title={event.title} />
+                <EventLogistics event={event} />
+                <EventContent>
+                    <p>{event.description}</p>
+                </EventContent>
+            </>
+        )
+    } 
 }
 
 export default EventPage;

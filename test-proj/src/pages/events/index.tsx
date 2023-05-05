@@ -1,13 +1,19 @@
-import EventComponent from "@/components/events/EvenItem";
+import EventList from "@/components/events/EventList";
+import EventsSearch from "@/components/events/EventsSearch";
 import { DUMMY_EVENTS } from "@/data/dummy_events";
-import { EventInfo } from "@/util/types";
+import { useRouter } from "next/router";
+import { useCallback } from "react";
 
 function EventsIndexPage() {
+    const router = useRouter();
     const events = DUMMY_EVENTS;
+
+    const handleSearch = useCallback((year: string, month: string) => router.push(`/events/${year}/${month}`), [router]);
+
     return (
         <>
-            <h1>All Events</h1>
-            {events.map(event => <EventComponent key={event.id} event={event} />)}
+            <EventsSearch onSearch={handleSearch}/>
+            <EventList events={events} />
         </>
     )
 }
