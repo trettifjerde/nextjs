@@ -5,6 +5,7 @@ import classes from './event-logistics.module.css';
 import { EventInfo } from '@/util/types';
 
 function EventLogistics({event}: {event: EventInfo}) {
+  const date = new Date(event.date);
 
   return (
     <section className={classes.logistics}>
@@ -13,7 +14,7 @@ function EventLogistics({event}: {event: EventInfo}) {
       </div>
       <ul className={classes.list}>
         <LogisticsItem icon={DateIcon}>
-          <time>{event.date.toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'})}</time>
+          <time>{date.toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'})}</time>
         </LogisticsItem>
         <LogisticsItem icon={AddressIcon}>
           <address>{event.address}</address>

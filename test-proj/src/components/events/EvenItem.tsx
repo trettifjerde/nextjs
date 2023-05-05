@@ -7,6 +7,8 @@ import ArrowRightIcon from "../icons/arrow-right-icon";
 
 
 function EventItem({event}: {event: EventInfo}) {
+    const date = new Date(event.date);
+
     return (
         <li className={classes.item}>
             <img />
@@ -14,7 +16,7 @@ function EventItem({event}: {event: EventInfo}) {
                 <h2>{event.title}</h2>
                 <div className={classes.date}>
                     <DateIcon />
-                    <time>{event.date.toLocaleDateString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'})}</time>
+                    <time>{date.toLocaleDateString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'})}</time>
                 </div>
                 <div className={classes.address}>
                     <AddressIcon />

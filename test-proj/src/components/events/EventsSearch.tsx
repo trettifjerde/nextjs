@@ -1,7 +1,6 @@
 import { FormEventHandler, useRef } from "react";
 import Button from "../ui/button";
 import classes from "./event-search.module.css";
-import { useRouter } from "next/router";
 
 function EventsSearch({onSearch}: {onSearch: (y: string, m: string) => {}}) {
     const yearRef = useRef<HTMLSelectElement>(null);
