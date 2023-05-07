@@ -4,6 +4,7 @@ import Button from "../ui/button";
 import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
+import Image from "next/image";
 
 
 function EventItem({event}: {event: EventInfo}) {
@@ -11,7 +12,7 @@ function EventItem({event}: {event: EventInfo}) {
 
     return (
         <li className={classes.item}>
-            <img />
+            <Image src={event.image} width={400} height={400} alt={event.title} />
             <div className={classes.content}>
                 <h2>{event.title}</h2>
                 <div className={classes.date}>

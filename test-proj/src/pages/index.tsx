@@ -1,4 +1,5 @@
 import EventList from "@/components/events/EventList";
+import NewsletterRegistration from "@/components/input/newsletter-generation";
 import Button from "@/components/ui/button";
 import ErrorAlert from "@/components/ui/error-alert";
 import { fetchEvents } from "@/data/dataService";
@@ -13,6 +14,7 @@ function IndexPage({events, error}: {events: EventInfo[], error: string}) {
                         <div className="center"><Button href="./">Try again</Button></div>
                     </>
                 }
+                <NewsletterRegistration />
                 <EventList events={events} />
             </>
         )

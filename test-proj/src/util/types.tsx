@@ -4,7 +4,8 @@ export type EventInfo = {
     description: string,
     date: string,
     address: string,
-    featured: boolean
+    featured: boolean,
+    image: string
 }
 
 export type FBEvents = {
@@ -13,8 +14,26 @@ export type FBEvents = {
 
 export type FBEvent = {
     title: string,
+    image: string,
     description: string,
     date: string,
     address: string,
     featured: boolean
+}
+
+export type FBComment = {
+    email: string,
+    name: string,
+    text: string,
+}
+
+export type NewFBEntry = {
+    name: string
+}
+
+export type Comment = {
+    id: string,
+    email: string,
+    name: string,
+    text: string,
 }

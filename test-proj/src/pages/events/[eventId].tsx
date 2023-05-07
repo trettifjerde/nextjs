@@ -1,6 +1,7 @@
 import EventContent from "@/components/event-details/event-content";
 import EventLogistics from "@/components/event-details/event-logistics";
 import EventSummary from "@/components/event-details/event-summary";
+import Comments from "@/components/input/comments";
 import Button from "@/components/ui/button";
 import ErrorAlert from "@/components/ui/error-alert";
 import { fetchEvent, fetchEvents } from "@/data/dataService";
@@ -23,6 +24,7 @@ function EventPage({event, error}: {event: EventInfo, error: string}) {
                 <EventContent>
                     <p>{event.description}</p>
                 </EventContent>
+                <Comments eventId={event.id} />
             </>
         )
     }
@@ -56,7 +58,7 @@ export const getStaticPaths : GetStaticPaths = async () => {
     const events = await fetchEvents();
     return {
         paths: events.data.map(event => ({params: {eventId: event.id}})),
-        fallback: false
+        fallback: true
     }
 }
 
