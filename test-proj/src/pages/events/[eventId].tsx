@@ -8,9 +8,9 @@ import { fetchEvent, fetchEvents } from "@/data/dataService";
 import { EventInfo } from "@/util/types";
 import { GetStaticPaths, GetStaticProps } from "next";
 
-function EventPage({event, error}: {event: EventInfo, error: string}) {
+function EventPage({event, eventError}: {event: EventInfo, eventError: string}) {
 
-    if (error) {
+    if (eventError) {
         return <>
             <ErrorAlert>No event found</ErrorAlert>
             <div className="center"><Button href="/events">Back to all events</Button></div>
@@ -40,15 +40,12 @@ export const getStaticProps : GetStaticProps<{event: EventInfo, error: string}> 
 
     if (typeof id === 'string') {
         const res = await fetchEvent(id);
-        props = {
-            event: res.data,
-            error: res.error
-        }
+        props = {...res};
     }
     else {
         props = {
             event: {} as EventInfo,
-            error: 'Failed to load event'
+            error: 'Failed to load event',
         }
     }
     return {props};

@@ -1,23 +1,22 @@
 import { FormEventHandler, useRef } from 'react';
 import classes from './newsletter-generation.module.css';
-import { registerEmailSubscription } from '@/data/dataService';
 
 function NewsletterRegistration() {
   const emailRef = useRef<HTMLInputElement>(null);
 
-  const registrationHandler: FormEventHandler = async (event) => {
+  const registrationHandler: FormEventHandler = (event) => {
     event.preventDefault();
     const email = emailRef.current!.value.trim();
 
     if (email) {
-      const res = await registerEmailSubscription(email);
-      if (res.error) {
-        console.log(res.error);
-      }
-      else {
-        console.log(`Email registered. Id: ${res.data}`);
-        emailRef.current!.value = '';
-      }
+      fetch('/api/newsletter', {
+        method: 'POST',
+        body: JSON.stringify({email}),
+        headers: {'Content-Type': 'application/json'}
+      })
+      .then(r => r.json())
+      .then(({message}) => console.log(message))
+      .catch(err => console.log(err))
     }
   }
 

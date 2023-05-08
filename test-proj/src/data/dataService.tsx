@@ -1,4 +1,4 @@
-import { Comment, EventInfo, FBComment, FBEvent, FBEvents, NewFBEntry } from "@/util/types";
+import { Comment, EventInfo, FBComment, FBEvent, FBEvents } from "@/util/types";
 
 export async function fetchEvents() : Promise<{data: EventInfo[], error: string}>{
     const events = await fetch('https://academind34-default-rtdb.europe-west1.firebasedatabase.app/events.json')
@@ -9,7 +9,7 @@ export async function fetchEvents() : Promise<{data: EventInfo[], error: string}
     return events;
 }
 
-export async function fetchEvent(id: string): Promise<{data: EventInfo, error: string}>{
+export async function fetchEvent(id: string): Promise<{event: EventInfo, error: string}>{
     const event = await fetch(`https://academind34-default-rtdb.europe-west1.firebasedatabase.app/events/${id}.json`)
         .then(res => res.json())
         .then((data: FBEvent) => {
@@ -21,40 +21,10 @@ export async function fetchEvent(id: string): Promise<{data: EventInfo, error: s
         .then(data => ({data, error: ''}))
         .catch(err => handleError(err, {} as EventInfo, 'Could not fetch event'));
 
-    return event;
-}
-
-export async function registerEmailSubscription(email: string): Promise<{data: string, error: string}> {
-    const res = await fetch('https://academind34-default-rtdb.europe-west1.firebasedatabase.app/events-subscription.json', {
-            method: 'POST',
-            body: JSON.stringify(email),
-            headers: {'Content-Type': 'application/json'}
-            })
-        .then(res => res.json())
-        .then((data: NewFBEntry) => ({data: data.name, error: ''}))
-        .catch(error => handleError(error, '', 'Could not register email subscription'))
-    return res;
-}
-
-export async function fetchComments(eventId: string): Promise<{data: Comment[], error: string}> {
-    const res = await fetch(`https://academind34-default-rtdb.europe-west1.firebasedatabase.app/events-comments/${eventId}.json`)
-        .then(res => res.json())
-        .then((data: {[id: string]: FBComment}) => ({data: transformFirebaseComments(data), error: ''}))
-        .catch(error => handleError<Comment[]>(error, [], 'Could not fetch comments'))
-    return res;
-}
-
-export async function sendComment(comment: FBComment, eventId: string): Promise<{data: Comment, error: string}> {
-    const res = await fetch(`https://academind34-default-rtdb.europe-west1.firebasedatabase.app/events-comments/${eventId}.json`, {
-        method: 'POST', 
-        body: JSON.stringify(comment),
-        headers: {'Content-Type': 'application/json'}
-    })
-    .then(res => res.json())
-    .then((data: NewFBEntry) => ({data: {id: data.name, ...comment} as Comment, error: ''}))
-    .catch(error => handleError(error, {} as Comment, 'Could not submit your comment'))
-
-    return res;
+    return {
+        event: event.data,
+        error: event.error,
+    };
 }
 
 function transformFirebaseEvents(fbEvents: FBEvents) {

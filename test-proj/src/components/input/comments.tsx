@@ -4,13 +4,13 @@ import CommentList from './comment-list';
 import NewComment from './new-comment';
 import classes from './comments.module.css';
 import { Comment, FBComment } from '@/util/types';
-import { fetchComments, sendComment } from '@/data/dataService';
 import ErrorAlert from '../ui/error-alert';
+import { fetchComments, sendComment } from '@/data/clientDataService';
 
 function Comments({eventId}: {eventId: string}) {
 
-  const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
+  const [showComments, setShowComments] = useState(false);
   const [error, setError] = useState('');
 
   function toggleCommentsHandler() {
@@ -18,18 +18,23 @@ function Comments({eventId}: {eventId: string}) {
   }
 
   const addCommentHandler = useCallback(async (comment: FBComment) => {
-    const res = await sendComment(comment, eventId);
+    const res = await sendComment(eventId, comment);
+
     if (res.error) 
-      setError(res.error)
-    else 
-      setComments(prev => ([...prev, res.data]))
-  }, [setError, setComments]);
+      setError(error);
+    else if (res.comment.id) 
+      setComments(prev => ([res.comment, ...prev]))
+
+  }, [eventId, setError, setComments]);
 
   useEffect(() => {
-    fetchComments(eventId).then(({data, error}) => {
-      setError(error);
-      setComments(data);
-    })
+    if (eventId) {
+      fetchComments(eventId)
+        .then(res => {
+          if (res.error) setError(res.error);
+          else setComments(res.comments);
+        })
+    }
   }, []);
 
   return (

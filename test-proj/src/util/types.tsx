@@ -1,3 +1,5 @@
+import {ObjectId} from 'mongodb';
+
 export type EventInfo = {
     id: string,
     title: string,
@@ -21,10 +23,25 @@ export type FBEvent = {
     featured: boolean
 }
 
+export type DBComment = {
+    email: string,
+    name: string,
+    text: string,
+    eventId: string,
+    _id: ObjectId
+}
+
 export type FBComment = {
     email: string,
     name: string,
     text: string,
+}
+
+export type PreDBComment = {
+    email: string,
+    name: string,
+    text: string,
+    eventId: string
 }
 
 export type NewFBEntry = {
@@ -33,7 +50,6 @@ export type NewFBEntry = {
 
 export type Comment = {
     id: string,
-    email: string,
     name: string,
     text: string,
 }

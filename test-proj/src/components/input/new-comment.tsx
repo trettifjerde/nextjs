@@ -1,6 +1,6 @@
 import { FormEventHandler, useRef, useState } from 'react';
 import classes from './new-comment.module.css';
-import { Comment, FBComment } from '@/util/types';
+import { FBComment } from '@/util/types';
 
 function NewComment({onAddComment}: {onAddComment: (c: FBComment) => void}) {
   const [isInvalid, setIsInvalid] = useState(false);
