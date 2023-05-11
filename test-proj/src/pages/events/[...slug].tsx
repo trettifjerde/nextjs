@@ -25,7 +25,6 @@ function EventsDatePage({date, error, events}: {error: string, date: number[], e
 
 export const getServerSideProps: GetServerSideProps = async(context) => {
     const slug = context.params?.slug;
-    console.log(slug);
     let props: {error: string, date: number[], events: EventInfo[]};
 
     if (!slug || !(slug instanceof Array) || slug.length !== 2) {

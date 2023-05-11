@@ -53,3 +53,11 @@ export type Comment = {
     name: string,
     text: string,
 }
+
+export type NotificationStatus = 'pending' | 'success' | 'error'
+
+export type Notification = {
+    title: string,
+    message: string,
+    status: NotificationStatus
+}

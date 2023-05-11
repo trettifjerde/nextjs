@@ -6,23 +6,27 @@ export async function sendComment(eventId: string, comment: FBComment) {
         body: JSON.stringify({comment}),
         headers: {'Content-Type': 'application/json'}
       })
-        .then(res => res.json())
+        .then(res => {
+            if (res.ok) return res.json()
+            else return res.json().then(err => {
+                throw new Error(err.message);
+            })
+        })
         .catch(error => {
-            console.log('Client error while sending comment');
-            console.log(error);
-
-            return {comment: {} as Comment, error: 'Could not send comment'}
+            return {comment: {} as Comment, error: error.message || 'Failed to send comment'}
         })
     return res;
 }
 
 export function fetchComments(eventId: string) : Promise<{comments: Comment[], error: string}> {
     return fetch(`/api/${eventId}/comments`)
-        .then(res => res.json())
+        .then(res => {
+            if (res.ok) return res.json()
+            else return res.json().then(error => {
+                throw new Error(error.message)
+            })
+        })
         .catch(error => {
-            console.log('Client error while fetching comments');
-            console.log(error);
-
-            return {comments: [] as Comment[], error: 'Could not fetch comments'}
+            return {comments: [] as Comment[], error: error.message || 'Failed to fetch comments'}
         })
 }

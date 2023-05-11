@@ -51,10 +51,6 @@ function transformFirebaseEvent(id: string, info: FBEvent) {
     } as EventInfo
 }
 
-function transformFirebaseComments(comments: {[id: string]: FBComment} | null) {
-    return comments ? Object.entries(comments).map(([id, info]) => ({id, ...info} as Comment)) : [] as Comment[]
-}
-
 function handleError<T>(error: Error, defaultData: T, errorText: string) {
     console.log(error);
     return {data: defaultData, error: errorText}

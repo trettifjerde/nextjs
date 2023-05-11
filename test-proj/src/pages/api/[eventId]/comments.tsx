@@ -8,7 +8,7 @@ const handler: NextApiHandler = async(req, res) => {
     const eventId = req.query.eventId;
 
     if (typeof eventId !== 'string') {
-        res.status(400).json({error: 'Invalid event'});
+        res.status(400).json({message: 'Invalid event ID'});
         return;
     }
     
@@ -18,7 +18,7 @@ const handler: NextApiHandler = async(req, res) => {
         client = await connectDB();
     }
     catch (error) {
-        res.status(500).json({error: 'Connection failed'});
+        res.status(500).json({message: 'Connection to database failed'});
         return;
     }
 
@@ -26,7 +26,7 @@ const handler: NextApiHandler = async(req, res) => {
         const comment = req.body.comment as PreDBComment;
 
         if (!comment.name.trim() || !comment.text.trim() || !comment.email.trim()) {
-            res.status(400).json({error: 'Invalid input'});
+            res.status(400).json({message: 'Invalid input'});
         }
         else {
             try {
@@ -38,7 +38,7 @@ const handler: NextApiHandler = async(req, res) => {
                 } as Comment});
             }
             catch (error) {
-                res.status(500).json({error: 'Connection failed'});
+                res.status(500).json({message: 'Connection to database failed'});
             }
         }
     }
@@ -52,7 +52,7 @@ const handler: NextApiHandler = async(req, res) => {
             res.status(200).json({comments: comments});
         } 
         catch (error) {
-            res.status(500).json({error: 'Connection failed'});
+            res.status(500).json({message: 'Connection to database failed'});
         }
     }
     client.close();

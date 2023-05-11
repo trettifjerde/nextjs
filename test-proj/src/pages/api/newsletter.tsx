@@ -15,7 +15,7 @@ const handler: NextApiHandler = async (req, res) => {
         try {
             client = await connectDB();
         } catch (error) {
-            res.status(500).json({message: 'Connection failed'});
+            res.status(500).json({message: 'Connection to database failed'});
             return;
         }
 
@@ -24,7 +24,7 @@ const handler: NextApiHandler = async (req, res) => {
             res.status(200).json({message: `Email ${email} is subscribed to newsletter`})
         } 
         catch (error) {
-            res.status(500).json({message: 'Connection failed'})
+            res.status(500).json({message: 'Connection to database failed'})
         }
         client.close();
         return;
