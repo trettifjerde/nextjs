@@ -15,9 +15,14 @@ a {
   text-decoration: none;
 }
 
-button, input, body {
+button, input, body, textarea {
   font-family: oswald;
   font-size: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-block: 2rem;
 }
 
 .btn {
@@ -37,6 +42,11 @@ button, input, body {
 
 .center {
   text-align: center;
+}
+
+.error-text {
+  color: red;
+  font-size: 16px;
 }
 
 @font-face

@@ -1,0 +1,103 @@
+.form {
+    width: 60%;
+    margin: 1rem auto;
+}
+
+.form label {
+    cursor: pointer;
+}
+
+.hr {
+    margin-block: 1rem;
+}
+
+.control, .checkscontrol, .switch {
+    display: grid;
+    align-items: center;
+    min-height: 3rem;
+    margin-block: 0.5rem;
+}
+
+.control label, .checkscontrol label, .switch label {text-align: right;}
+
+.control, .switch {grid-template-columns: 1fr 1fr 1fr;}
+
+.checkscontrol {
+    grid-template-columns: 1fr 2fr;
+}
+
+.input, .textarea {
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: transparent;
+    color: black;
+    margin: 0.5rem;
+    outline: none;
+    padding: 0.2rem 0.5rem;
+    transition: border-color .3s, background-color .3s;
+}
+
+.textarea {
+    min-width: 100%;
+    min-height: 7rem;
+}
+
+.textarea:disabled {
+    background-color: #dbdbdb;
+    border-color: transparent;
+    resize: none;
+}
+
+.btn {
+    display: block;
+    color: black;
+    border-color: black;
+    margin: 1rem auto;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    margin-inline: 0.5rem;
+    position: relative;
+}
+
+.slider span {
+    display: block;
+    width: 4rem;
+    height: 2rem;
+    background-color: #ccc;
+    transition: .4s;
+    padding: 0;
+    margin: 0;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.slider span:before {
+    position: absolute;
+    content: "";
+    height: calc(2rem - 2px);
+    width: calc(2rem - 2px);
+    left: 1px;
+    top: 1px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.switch input:checked+.slider span {
+    background-color: rgb(0, 183, 255);
+}
+
+.switch input:checked+.slider span:before {
+    transform: translateX(2rem);
+}
+
+.checks label {
+    margin-inline: 0.6rem;
+}
+
+.checks input {margin-right: 0.3rem;}

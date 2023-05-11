@@ -1,5 +1,3 @@
-'use client';
-
 import { FormEventHandler, useCallback, useContext, useRef } from 'react';
 import classes from '../form.module.css';
 import UserContext from '@/context/user-context';
