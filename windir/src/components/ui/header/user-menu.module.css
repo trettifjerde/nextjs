@@ -1,0 +1,7 @@
+.user {
+    margin-bottom: 2rem;
+}
+
+.user span {
+    cursor: pointer;
+}
