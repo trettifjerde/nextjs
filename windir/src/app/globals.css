@@ -1,3 +1,7 @@
+:root {
+  --dark: #222325;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

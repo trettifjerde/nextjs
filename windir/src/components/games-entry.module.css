@@ -1,0 +1,42 @@
+.entry {
+    display: flex;
+    align-items: center;
+}
+
+.username, .cell {
+    height: 2.5rem;
+    line-height: 2.5rem;
+    margin: 0.1rem;
+    padding: 0 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--dark);
+    transition: background-color .3s;
+}
+
+.username {
+    min-width: 10rem;
+}
+
+.cell {
+    min-width: 3rem;
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.on {
+    background-color: #a3ffa7;;
+}
+.on:hover {
+    background-color: #d1ffd2;
+}
+
+.off {
+    background-color: #ffc2c8;
+}
+.off:hover {
+    background-color: #ffdade;
+}
+
+.pending {
+    background-color: #fff9c2;
+}
