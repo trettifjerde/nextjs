@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext} from 'react';
 import classes from './header.module.css';
 import Logo from '../ui/logo';
 import UserContext from '@/context/user-context';

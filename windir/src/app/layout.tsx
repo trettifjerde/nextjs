@@ -17,7 +17,7 @@ export default function RootLayout({
         </head>
         <body>
           <UserContextProvider>
-            <Navigation dark={false} />
+            <Navigation />
             <WindirHeader />
             <main>{children}</main>
           </UserContextProvider>

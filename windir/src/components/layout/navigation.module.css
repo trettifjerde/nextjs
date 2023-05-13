@@ -8,9 +8,9 @@
 .list {
     list-style-type: none;
     list-style-position: inside;
-    background-color: transparent;
-    transition: background-color .3s;
     display: flex;
+    background-color: transparent;
+    transition: background-color .2s;
 }
 
 .list li {
@@ -18,10 +18,31 @@
     border: 1px solid transparent;
     border-radius: 5px;
     color: white;
-    transition: border-color .3s, background-color .3s;
+    text-shadow: -1px 0 5px #2c2c2c, 0 1px 5px #2c2c2c, 1px 0 5px #2c2c2c, 0 -1px 5px #2c2c2c;
+    background-color: transparent;
+    transition: border-color .2s, background-color .2s, padding .2s;
 }
 
 .list li:hover {
     border-color: white;
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.list li::marker {
+    content: '';
+}
+
+.dark .list {
+    background-color: black;
+    box-shadow: 0 1px 6px 1px gray;
+}
+
+.dark .list li {
+    padding: 0.5rem 1rem;
+    border-color: transparent white;
+    border-radius: 0px;
+}
+
+.dark .list li:hover {
+    border-color: white;
 }
