@@ -1,5 +1,6 @@
 :root {
   --dark: #222325;
+  --blue: rgb(0, 247, 255);
 }
 
 * {
@@ -60,19 +61,17 @@ h5 {
   text-align: center;
 }
 
+.sm {
+  font-size: 1rem;
+}
+
 .error-text {
   color: red;
   font-size: 16px;
 }
 
-ul {
-  list-style-position: inside;
-}
-
-ul li::marker {
-  content: 'o';
-  font-family: logo-font;
-  padding-inline-start: 1rem;
+.img-cont {
+  position: relative;
 }
 
 @font-face

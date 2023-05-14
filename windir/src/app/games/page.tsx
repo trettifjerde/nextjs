@@ -1,10 +1,10 @@
 import { games } from "@/util/games";
 import classes from './games.module.css';
 import GameEntry from "@/components/game-entry";
-import PageContent from "@/components/ui/page-content";
+import PageContent from "@/components/ui/article/page-content";
 
 export default function Games() {
-    return (<PageContent>
+    return (<PageContent className="">
         <h1>Игры</h1>
         <div className={classes.games}>
             {Object.entries(games).map(([username, days]) => <GameEntry key={username} username={username} info={days} />)}

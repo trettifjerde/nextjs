@@ -109,7 +109,7 @@ return <>
 
         <button className={`btn ${classes.btn}`}>Отправить заявку</button>
 
-        <p className="sm c">
+        <p className="center sm">
             Нажимая "Отправить", вы подтверждаете, что ознакомились с 
             <Link href="/about"> информацией об отряде и его правилами</Link>
         </p>

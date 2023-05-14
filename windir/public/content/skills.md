@@ -1,5 +1,5 @@
 ---
-mainImage: '/media/lessons.jpg'
+mainImage: '/images/lessons.jpg'
 title: 'Программа-минимум'
 ---
 ---

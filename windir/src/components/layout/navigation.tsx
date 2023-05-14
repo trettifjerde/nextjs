@@ -1,11 +1,15 @@
 'use client';
-import { useEffect, useState} from 'react';
+import { useCallback, useEffect, useState} from 'react';
 import Link from 'next/link';
 import classes from './navigation.module.css';
 
 function Navigation() {
 
     const [dark, setTheme] = useState(false);
+
+    const scrollUp = useCallback(() => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }, []);
 
     useEffect(() => {
         let timer: any;
@@ -36,6 +40,10 @@ function Navigation() {
                 <Link href="/articles"><li>Статьи</li></Link>
                 <Link href="/about"><li>Об отряде</li></Link>
                 <Link href="/register"><li>Заявка в отряд</li></Link>
+            </ul>
+            <ul className={classes.list}>
+                <li className={classes['nav-btn']} title="наверх" onClick={scrollUp}>t</li>
+                <li className={classes['nav-btn']} title="сменить тему">o</li>
             </ul>
         </nav>
     )

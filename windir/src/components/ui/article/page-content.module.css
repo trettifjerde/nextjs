@@ -1,0 +1,31 @@
+.content {
+    max-width: 1000px;
+    margin: 5rem auto;
+}
+
+.content ul {
+    margin-block: 1rem;
+    padding-left: 1rem;
+}
+
+.content ul li {
+    padding-left: 1rem;
+}
+  
+.content ul li::marker {
+    content: 'o';
+    font-family: logo-font;
+}
+
+.content a {
+    color: white;
+    padding: 3px 10px;
+    background-color: black;
+    transition: background-color .3s;
+    text-decoration: underline;
+    border-radius: 5px;
+}
+
+.content a:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}

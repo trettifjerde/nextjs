@@ -26,12 +26,12 @@ SolidGames - **B7AQISCCIN5SMGBIBDQ6C27BJUID4YN2B**
 
 ##### Порядок действий
 1. Скачиваем Resilio Sync с [официального сайта](https://www.resilio.com/individuals/)\(кнопка **Free Download**\)            
-1. Устанавливаем, запускаем и заходим в настройки программы — там нужно настроить идентификатор и имя устройства. В них указываем ваш позывной на проектах. <img class="lazy thumbnail" data-src="/media/resilio_setts_id.png"/><img class="lazy thumbnail" data-src="/media/resilio_setts_name.png"/>
+1. Устанавливаем, запускаем и заходим в настройки программы — там нужно настроить идентификатор и имя устройства. В них указываем ваш позывной на проектах. ![meow](/images/resilio_setts_id.png)![meow](/images/resilio_setts_name.png)
 1. Далее добавляем раздачу с помощью ключа и выбираем папку, куда загрузить моды. 
 Если до этого скачивали моды другим способом, то появится соответствующее сообщение. 
-Тыкаем **ОК**.<img class="lazy thumbnail" data-src="/media/resilio_dir_selection.png"/><img class="lazy thumbnail" data-src="/media/resilio_overwrite.png"/><img class="lazy thumbnail" data-src="/media/resilio_new_entry.png"/><img class="lazy thumbnail" data-src="/media/resilio_key_input.png"/>
-1. После проделанных операций вы увидите новую добавленную раздачу.<img class="lazy thumbnail" data-src="/media/resilio_entry.png"/>
-1. И последнее — нужно настроить раздачу, чтобы обновлялась и не засоряла диск. Правый клик на раздаче -> Настройки -> Поставить нужные галки, как на скриншоте.<img class="lazy thumbnail" data-src="/media/resilio_entry_setts.png"/><img class="lazy thumbnail" data-src="/media/resilio_entry_required.png"/>
+Тыкаем **ОК**.![](/images/resilio_dir_selection.png)![](/images/resilio_overwrite.png)![](/images/resilio_new_entry.png)![](/images/resilio_key_input.png)
+1. После проделанных операций вы увидите новую добавленную раздачу.[](/images/resilio_entry.png)
+1. И последнее — нужно настроить раздачу, чтобы обновлялась и не засоряла диск. Правый клик на раздаче -> Настройки -> Поставить нужные галки, как на скриншоте.![](/images/resilio_entry_setts.png)![](/images/resilio_entry_required.png)
 
 Это все. Теперь ресилио будет автоматически обновлять моды и раздавать другим на максимальной скорости. Включайте периодически, чтобы быть синхронизированными и помогать другим.
 
