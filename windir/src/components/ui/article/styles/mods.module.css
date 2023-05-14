@@ -1,0 +1,19 @@
+.mods {}
+
+.mods .img-cont {
+
+}
+
+.mods li > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+
+.mods li .img-cont {
+    flex-shrink: 1;
+    height: 300px;
+    width: calc(50% - 4px);
+    margin-block: 2rem;
+}

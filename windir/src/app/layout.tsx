@@ -19,7 +19,7 @@ export default function RootLayout({
           <UserContextProvider>
             <Navigation />
             <WindirHeader />
-            <main>{children}</main>
+            {children}
           </UserContextProvider>
         </body>
       </html>

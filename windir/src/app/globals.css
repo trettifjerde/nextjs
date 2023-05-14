@@ -33,13 +33,13 @@ h1 {
 
 h2 {
   font-size: 28px;
-  margin-block: 1rem;
+  margin-block: 2rem;
 }
 
 h5 {
   text-align: left;
   font-size: 20px;
-  margin-block: 0.5rem;
+  margin-block: 3rem 0.5rem;
 }
 
 .btn {
@@ -72,6 +72,16 @@ h5 {
 
 .img-cont {
   position: relative;
+}
+
+.img-cont img {
+  object-fit: contain;
+}
+
+.attention {
+  margin-left: 2rem;
+  color: red;
+  font-weight: bold;
 }
 
 @font-face

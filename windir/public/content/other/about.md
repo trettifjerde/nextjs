@@ -1,6 +1,7 @@
 ---
-mainImage: /images/eye_unit.png
+mainImage: '/images/eye_unit.png'
 title: ''
+styles: ''
 ---
 # Приветствую всех посетителей сайта отряда Windir
 

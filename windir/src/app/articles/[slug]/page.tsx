@@ -1,6 +1,6 @@
 import PageHeader from '@/components/ui/article/page-header';
 import PageContent from '@/components/ui/article/page-content';
-import { getPage } from '@/util/markdown';
+import { getCustomRenderers, getPage } from '@/util/markdown';
 import fs from 'fs';
 import path from 'path';
 import ReactMarkdown  from 'react-markdown';
@@ -8,12 +8,11 @@ import ReactMarkdown  from 'react-markdown';
 function Article({params}: {params: {slug: string}}) {
     const {slug} = params;
     const {data, content} = getPage(slug + '.md');
-    const {title, mainImage} = data;
+    const metaInfo = {title: data.title, mainImage: data.mainImage, styles: data.styles};
     
-    return(<PageContent className=''>
-        <PageHeader title={title} image={mainImage}  />
-        <ReactMarkdown>{content}</ReactMarkdown>
-    </PageContent>)
+    return <PageContent className="about" data={metaInfo}>
+        <ReactMarkdown components={getCustomRenderers(data.styles)}>{content}</ReactMarkdown>
+    </PageContent>
 }
 export default Article;
 

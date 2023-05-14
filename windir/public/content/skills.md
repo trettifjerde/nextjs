@@ -1,6 +1,7 @@
 ---
 mainImage: '/images/lessons.jpg'
 title: 'Программа-минимум'
+styles: 'skills'
 ---
 ---
 
