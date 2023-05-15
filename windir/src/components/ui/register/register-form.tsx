@@ -17,9 +17,10 @@ const pass1Ref = useRef<HTMLInputElement>(null);
 const pass2Ref = useRef<HTMLInputElement>(null);
 const formRef = useRef<HTMLFormElement>(null);
 
-
 const getClassName = useCallback((error: string | undefined) => (`${classes.input} ${error ? classes.invalid : ''}`), []);
+
 const handleHasTelegram = useCallback(() => setHasTelegram(prev => !prev), [setHasTelegram]);
+
 const checkPasswordMatch = useCallback(() => {
     if (pass1Ref.current!.value !== pass2Ref.current!.value)
     setErrors(prev => ({...prev, password2: 'Пароли не совпадают'}))
@@ -51,7 +52,6 @@ const formMessageContent = useCallback(() => {
         <p className='remark center'>Обязательные поля отмечены жирным</p> : 
         <p className="error-text center">Не все поля заполнены верно</p>;
 }, [errors]);
-
 
 return <>
     <h1>Заявка в отряд</h1>
@@ -126,6 +126,11 @@ return <>
             </div>
         </div>
 
+        <div className={classes.control}>
+            <label htmlFor="teams">Отряды, в которых вы состояли</label>
+            <textarea className={classes.textarea} id="teams" name="teams" maxLength={500} />
+        </div>
+
         <div className={classes.checkscontrol}>
             <label>Проекты, на которых вы играли</label>
             <div className={classes.checks}>
@@ -135,14 +140,14 @@ return <>
                 <label>
                     <input type="checkbox" name="project-other" onClick={addExtraProject} /> Другие
                 </label>
-                <textarea className={classes.textarea} name="other" placeholder="Перечислите другие" maxLength={500} disabled={!extraProjectVisible} />
             </div>
         </div>
 
-        <div className={classes.checkscontrol}>
-            <label htmlFor="teams">Отряды, в которых вы состояли</label>
-            <textarea className={classes.textarea} id="teams" name="teams" maxLength={500} />
-        </div>
+        {extraProjectVisible && <div className={classes.control}>
+            <label htmlFor="other-proj">Другие проекты</label>
+            <textarea id="other-proj" className={classes.textarea} name="other" maxLength={500}/>
+        </div>}
+
 
         <button className={`btn ${classes.btn}`}>Отправить заявку</button>
 

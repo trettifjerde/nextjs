@@ -10,7 +10,7 @@ function Article({params}: {params: {slug: string}}) {
     const {data, content} = getPage(slug + '.md');
     const metaInfo = {title: data.title, mainImage: data.mainImage, styles: data.styles};
     
-    return <PageContent className="about" data={metaInfo}>
+    return <PageContent className={data.styles} data={metaInfo}>
         <ReactMarkdown components={getCustomRenderers(data.styles)}>{content}</ReactMarkdown>
     </PageContent>
 }

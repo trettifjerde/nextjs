@@ -33,7 +33,6 @@ export function cleanRegisterFormData(data: {[key: string]: FormDataEntryValue})
     if (!cleanedData.password1)
         errors.password1 = 'Обязательное поле';
     if (!cleanedData.password2) {
-        console.log('meow');
         errors.password2 = 'Обязательное поле';
     }
     if (!cleanedData.dob) 

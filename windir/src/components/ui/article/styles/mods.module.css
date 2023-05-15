@@ -1,9 +1,5 @@
 .mods {}
 
-.mods .img-cont {
-
-}
-
 .mods li > div {
     display: flex;
     flex-wrap: wrap;

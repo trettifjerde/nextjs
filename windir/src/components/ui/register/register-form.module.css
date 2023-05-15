@@ -28,9 +28,9 @@
 
 .input, .textarea {
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid var(--dark);
     background-color: transparent;
-    color: black;
+    color: var(--dark);
     margin: 0.5rem;
     outline: none;
     padding: 0.2rem 0.5rem;
@@ -43,15 +43,15 @@
 }
 
 .textarea:disabled {
-    background-color: #dbdbdb;
+    background-color: #f7f7f7;
     border-color: transparent;
     resize: none;
 }
 
 .btn {
     display: block;
-    color: black;
-    border-color: black;
+    color: var(--dark);
+    border-color: var(--dark);
     margin: 1rem auto;
 }
 
@@ -95,6 +95,8 @@
 .switch input:checked+.slider span:before {
     transform: translateX(2rem);
 }
+
+.checks {margin: 1rem;}
 
 .checks label {
     margin-inline: 0.6rem;
