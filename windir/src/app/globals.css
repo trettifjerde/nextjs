@@ -1,6 +1,7 @@
 :root {
   --dark: #222325;
   --blue: rgb(0, 247, 255);
+  --red: #e50000;
 }
 
 * {
@@ -66,7 +67,7 @@ h5 {
 }
 
 .error-text {
-  color: red;
+  color: var(--red);
   font-size: 16px;
 }
 
@@ -80,8 +81,17 @@ h5 {
 
 .attention {
   margin-left: 2rem;
-  color: red;
+  color: var(--red);
   font-weight: bold;
+}
+
+.remark {
+  font-size: 1rem;
+  color: rgb(116, 116, 116);
+}
+
+.b {
+  font-weight: 600;
 }
 
 @font-face
