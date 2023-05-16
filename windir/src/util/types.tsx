@@ -1,4 +1,5 @@
-export type MarkdownData = {
-    mainImage: string,
-    title: string
+export type PageData = {
+    title: string,
+    image: string,
+    styles: string
 }

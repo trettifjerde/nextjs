@@ -1,5 +1,5 @@
 ---
-mainImage: '/images/mods_art_header.jpg'
+image: '/images/mods_art_header.jpg'
 title: 'Настройка модов'
 styles: 'mods'
 ---

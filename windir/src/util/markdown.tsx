@@ -2,15 +2,18 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
 import Image from 'next/image';
-import classes from '@/components/ui/article/styles/classes';
+import classes from '@/components/article/styles/classes';
+import { PageData } from './types';
 
 const sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw";
 
-export function getPage(name: string, other=false) {
+export function getPage(name: string, other=false): {data: PageData, content: string} {
     const breadcrumbs = ['public', 'content'];
     if (other) breadcrumbs.push('other');
+
     const {data, content} = matter(fs.readFileSync(path.join(process.cwd(), ...breadcrumbs, name), 'utf-8'));
-    return {data, content};
+    
+    return {data: data as PageData, content};
 }
 
 export function getCustomRenderers(styles?: string) {

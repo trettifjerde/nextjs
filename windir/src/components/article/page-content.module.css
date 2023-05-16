@@ -1,11 +1,17 @@
 .content {
     max-width: 1200px;
-    margin: 5rem auto;
+    margin-inline: auto;
+    padding-block: 5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .content section {
     max-width: 1000px;
-    margin: auto;
+    margin-inline: auto;
 }
 
 .content ul, .content ol {
@@ -25,7 +31,7 @@
 
 .content a {
     color: white;
-    padding: 3px 10px;
+    padding: 0 0.2em;
     background-color: var(--dark);
     transition: background-color .3s;
     text-decoration: underline;

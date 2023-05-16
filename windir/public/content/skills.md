@@ -1,5 +1,5 @@
 ---
-mainImage: '/images/lessons.jpg'
+image: '/images/lessons.jpg'
 title: 'Программа-минимум'
 styles: 'skills'
 ---

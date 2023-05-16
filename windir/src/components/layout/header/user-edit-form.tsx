@@ -1,5 +1,5 @@
 import { FormEventHandler, useCallback, useRef, useState } from 'react';
-import classes from '../form.module.css';
+import classes from '@/components/ui/form.module.css';
 
 function UserEditForm({toggleEdit}: {toggleEdit: () => void}) {
 
