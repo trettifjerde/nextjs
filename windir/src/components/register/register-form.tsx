@@ -72,7 +72,7 @@ const submitHandler: FormEventHandler = useCallback(async(e) => {
                 const errs = await result.json();
                 setErrors(errs);
             }
-            else if (result.status === 503) {
+            else if (result.status === 503 || result.status === 401) {
                 const {error : err} = await result.json();
                 setError(err);
             }

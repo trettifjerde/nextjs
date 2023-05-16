@@ -1,3 +1,4 @@
+import { hashPassword } from "./auth";
 import { isEmailValid } from "./validators";
 
 export function cleanRegisterFormData(data: {[key: string]: any}, validate=true) {
@@ -59,4 +60,14 @@ export function cleanRegisterFormData(data: {[key: string]: any}, validate=true)
     }
 
     return {cleanedData, errors};
+}
+
+export async function castToDbEntry(data: any) {
+    const dbEntry = {...data};
+    const password = data.password1;
+    delete dbEntry.password1;
+    delete dbEntry.password2;
+    const hashedPassword = await hashPassword(password);
+    dbEntry.password = hashedPassword;
+    return dbEntry;
 }

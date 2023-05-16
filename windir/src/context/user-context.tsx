@@ -3,7 +3,7 @@ import { ReactNode, createContext, useCallback, useState } from "react";
 
 const UserContext = createContext({
     username: '',
-    signIn: (name: string, pwd: string) => {},
+    signIn: (u: string, t: string) => {},
     signOut: () => {}
 });
 
@@ -11,8 +11,8 @@ export function UserContextProvider({children} : {children: ReactNode}) {
 
     const [username, setUser] = useState('');
 
-    const signIn = useCallback((name: string, pwd: string) => {
-        setUser(name);
+    const signIn = useCallback((username: string, token: string) => {
+        setUser(username);
     }, [setUser]);
 
     const signOut = useCallback(() => setUser(''), [setUser]);

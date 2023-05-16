@@ -1,5 +1,5 @@
 import { dbUrl } from "@/util/appKeys";
-import { cleanRegisterFormData } from "@/util/register";
+import { castToDbEntry, cleanRegisterFormData } from "@/util/register";
 import { MongoClient } from "mongodb";
 
 export async function POST(req: Request) {
@@ -20,7 +20,20 @@ export async function POST(req: Request) {
         }
 
         try {
-            await client.db().collection('windir-new-teammate').insertOne(cleanedData);
+            const username = await client.db().collection('windir-users').findOne({username: cleanedData.username});
+            if (username) {
+                client.close();
+                return new Response(JSON.stringify({error: 'Пользователь с таким позывным уже зарегистрирован'}), {status: 401})
+            }
+
+            const contact = await client.db().collection('windir-users').findOne({contact: cleanedData.contact});
+            if (contact) {
+                client.close();
+                return new Response(JSON.stringify({error: 'Пользователь с такой контактной информацией уже зарегистрирован'}), {status: 401})
+            }
+
+            const entry = await castToDbEntry(cleanedData);
+            await client.db().collection('windir-users').insertOne(entry);
             client.close();
             return new Response('', {status: 200})
         }
