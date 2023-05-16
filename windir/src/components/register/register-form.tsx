@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEventHandler, useCallback, useRef, useState } from 'react';
+import { FormEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import classes from './register-form.module.css';
 import specs from '@/util/specs';
 import projects from '@/util/projects';
@@ -21,6 +21,7 @@ const [error, setError] = useState('');
 const pass1Ref = useRef<HTMLInputElement>(null);
 const pass2Ref = useRef<HTMLInputElement>(null);
 const formRef = useRef<HTMLFormElement>(null);
+const messageRef = useRef<HTMLParagraphElement>(null);
 
 const getClassName = useCallback((error: string | undefined) => (`${classes.input} ${error ? classes.invalid : ''}`), []);
 
@@ -34,13 +35,14 @@ const checkPasswordMatch = useCallback(() => {
 const addExtraProject = useCallback(() => setExtraProjectVisible(prev => !prev), [setExtraProjectVisible]);
 
 const clearError = useCallback((key: string) => {
+    setError('');
     if (key in errors)
         setErrors(prev => {
             const upd = {...prev};
             delete upd[key];
             return upd;
         })
-}, [errors, setErrors]);
+}, [errors, setErrors, setError]);
 
 const submitHandler: FormEventHandler = useCallback(async(e) => {
     e.preventDefault();
@@ -57,7 +59,9 @@ const submitHandler: FormEventHandler = useCallback(async(e) => {
             method: 'POST',
             body: JSON.stringify(cleanedData),
             headers: {'Content-Type': 'application/json'}
-        });
+        })
+        .catch(err => (new Response('', {status: 404})));
+
         if (result.ok) {
             setLoading(false);
             setSuccess(true);
@@ -70,8 +74,10 @@ const submitHandler: FormEventHandler = useCallback(async(e) => {
             }
             else if (result.status === 503) {
                 const {error : err} = await result.json();
-                console.log(err);
                 setError(err);
+            }
+            else {
+                setError('Произошла ошибка. Проверьте интернет соединение и повторите позже');
             }
             setLoading(false);
         }
@@ -79,9 +85,16 @@ const submitHandler: FormEventHandler = useCallback(async(e) => {
 }, [formRef, setErrors]); 
 
 const formMessageContent = useCallback(() => {
-    return error ? <p className='error-text center'>{error}</p>: Object.keys(errors).length === 0 ? <p className='remark center'>Обязательные поля отмечены жирным</p> : 
-        <p className="error-text center">Не все поля заполнены верно</p>;
-}, [errors]);
+    const clName = (error || Object.keys(errors).length > 0) ? 'error-text' : 'remark'; 
+    return <p ref={messageRef} className={`center ${clName}`}>{
+        Object.keys(errors).length !== 0 ? 'Не все поля заполнены верно' :
+        error ? error :
+        'Обязательные поля отмечены жирным'}</p>
+}, [errors, error]);
+
+useEffect(() => {
+    if (error) messageRef.current!.scrollIntoView({behavior: 'smooth', block: 'center'});
+}, [error]);
 
 return <>
     {!success && <div className={classes['form-cont']}>

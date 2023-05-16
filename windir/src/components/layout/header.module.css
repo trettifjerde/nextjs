@@ -10,3 +10,9 @@
 .logo {
     padding-top: 20vh;
 }
+
+@media (max-width: 850px) {
+    .header {
+        background-attachment: fixed;
+    }
+}

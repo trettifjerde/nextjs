@@ -41,3 +41,17 @@
 .content a:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }
+
+@media (max-width: 1000px) {
+    .content {
+        padding-block: 3rem;
+        margin-inline: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        padding-block: 1rem;
+        margin-inline: 0.5rem;
+    }
+}
