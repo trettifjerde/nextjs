@@ -1,4 +1,5 @@
 import { dbUrl } from "@/util/appKeys";
+import { isCorrectPassword } from "@/util/auth";
 import { MongoClient } from "mongodb";
 
 export async function POST(req: Request) {
@@ -21,11 +22,11 @@ export async function POST(req: Request) {
 
     try {
         const user = await client.db().collection('windir-users').findOne({username: data.username});
-        if (!user) {
+        if (!user || !await isCorrectPassword(data.password, user.password)) {
             client.close();
             return new Response(JSON.stringify({error: 'Неверный позывной или пароль'}), {status: 401})
         }
-        console.log(user);
+
         client.close();
         return new Response(JSON.stringify({token: 'wogwogngo'}), {status: 200})
 
