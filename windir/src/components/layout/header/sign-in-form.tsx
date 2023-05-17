@@ -1,43 +1,28 @@
-import { FormEventHandler, useCallback, useContext, useRef, useState } from 'react';
+import { FormEventHandler, useCallback, useEffect, useRef, useState } from 'react';
+import { signIn, useSession } from 'next-auth/react';
 import classes from '@/components/ui/form.module.css';
-import UserContext from '@/context/user-context';
 import MiniLoadingSpinner from '@/components/ui/mini-spinner';
 
 function SingInForm() {
     const nameRef = useRef<HTMLInputElement>(null);
     const passRef = useRef<HTMLInputElement>(null);
-    const {signIn} = useContext(UserContext);
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const {data: session, status} = useSession();
 
     const handleSubmit: FormEventHandler = useCallback(async(e) => {
         e.preventDefault();
-        const name = nameRef.current!.value;
-        const pwd = passRef.current!.value;
+        const username = nameRef.current!.value;
+        const password = passRef.current!.value;
 
-        if (!name) nameRef.current!.focus();
-        else if (!pwd) passRef.current!.focus();
+        if (!username) nameRef.current!.focus();
+        else if (!password) passRef.current!.focus();
         else {
             setLoading(true);
-
-            const res = await fetch('/api/login', {
-                method: 'POST',
-                body: JSON.stringify({username: name, password: pwd}),
-                headers: {'Content-Type': 'application/json'}
-            })
-            .catch(err => {
-                console.log(err);
-                return new Response(JSON.stringify({error: 'Произошла ошибка. Проверьте интернет подключение и повторите позже'}), {status: 503});
-            })
-
-            const data = await res.json();
-
-            if (res.ok) {
-                signIn(name, data.token);
-            }
-            else {
-                setError(data.error);
+            const result = await signIn('credentials', {redirect: false, username, password});
+            if (result?.error) {
+                setError(result.error);
             }
             setLoading(false);
         }

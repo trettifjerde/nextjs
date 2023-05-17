@@ -1,19 +1,25 @@
-'use client';
-
-import { useContext} from 'react';
 import classes from './header.module.css';
 import Logo from '../ui/logo';
-import UserContext from '@/context/user-context';
 import SingInForm from './header/sign-in-form';
 import UserMenu from './header/user-menu';
+import { useSession } from 'next-auth/react';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 function WindirHeader() {
-    const {username} = useContext(UserContext);
+    const {data: session} = useSession();
 
     return (<header className={classes.header}>
         <Logo clName={classes.logo} />
-        {username && <UserMenu /> }
-        {!username && <SingInForm />}
+        <SwitchTransition mode='out-in'>
+            <CSSTransition key={session ? 'authed' : 'unathed'} timeout={300} classNames='fade' >   
+                <div>
+                    {session && <UserMenu/>}
+                    {!session && <SingInForm />}
+                </div>
+            </CSSTransition>
+
+        </SwitchTransition>
+
     </header>)
 }
 export default WindirHeader

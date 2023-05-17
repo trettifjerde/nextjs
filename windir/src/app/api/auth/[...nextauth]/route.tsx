@@ -1,10 +1,11 @@
 import { dbUrl } from "@/util/appKeys";
 import { isCorrectPassword } from "@/util/auth";
-import { MongoClient } from "mongodb";
+import { Document, MongoClient } from "mongodb";
+import { AuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
 
-const handler = NextAuth({
+export const authOptions : AuthOptions = {
     session: {
         strategy: 'jwt'
     },
@@ -30,16 +31,10 @@ const handler = NextAuth({
                 throw new Error('Ошибка доступа к данным. Попробуйте позже');
             }
 
+            let user: Document | null;
+
             try {
-                const user = await client.db().collection('windir-users').findOne({username: credentials.username});
-                if (!user || !await isCorrectPassword(credentials.password, user.password)) {
-                    client.close();
-                    throw new Error('Неверный позывной или пароль');
-                }
-
-                client.close();
-                return {id: user.username};
-
+                user = await client.db().collection('windir-users').findOne({username: credentials.username});
             }
             catch(error) {
                 console.log(error);
@@ -47,8 +42,15 @@ const handler = NextAuth({
                 throw new Error('Ошибка доступа к данным. Попробуйте позже');
             }
 
+            if (!user || !await isCorrectPassword(credentials.password, user.password)) {
+                throw new Error('Неверный позывной или пароль');
+            }
+
+            return {id: credentials.username};          
         }
     })]
-})
+};
+
+const handler = NextAuth(authOptions)
 
 export {handler as GET, handler as POST};

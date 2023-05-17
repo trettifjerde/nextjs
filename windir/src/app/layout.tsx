@@ -1,13 +1,11 @@
+'use client';
 import './globals.css'
 import Navigation from '@/components/layout/navigation'
 import WindirHeader from '@/components/layout/header'
-import { UserContextProvider } from '@/context/user-context'
+import { ReactNode } from 'react';
+import { SessionProvider } from 'next-auth/react';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default async function RootLayout({children}: {children: ReactNode}) {
   return (
       <html lang="ru">
         <head>
@@ -16,11 +14,11 @@ export default function RootLayout({
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </head>
         <body>
-          <UserContextProvider>
+          <SessionProvider>
             <Navigation />
             <WindirHeader />
             {children}
-          </UserContextProvider>
+          </SessionProvider>
         </body>
       </html>
   )

@@ -114,6 +114,24 @@ h5 {
   animation: slide-x .3s ease-in-out reverse forwards;
 }
 
+.fade {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.fade-enter-done {
+  visibility: visible;
+}
+
+.fade-enter {
+  visibility: visible;
+  animation: fade-in .3s ease-in-out forwards;
+}
+.fade-exit {
+  visibility: visible;
+  animation: fade-in .3s ease-in-out reverse forwards;
+}
+
 @media (max-width: 850px) {
   .slide-enter, .slide-exit {
     animation-name: slide-y;
@@ -139,6 +157,15 @@ h5 {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
   }
 }
 

@@ -1,13 +1,14 @@
-'use client';
 import { useCallback, useEffect, useState} from 'react';
 import {CSSTransition} from 'react-transition-group';
 import Link from 'next/link';
 import classes from './navigation.module.css';
+import { useSession } from 'next-auth/react';
 
 function Navigation() {
 
     const [dark, setTheme] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const {data: session, status} = useSession();
 
     const scrollUp = useCallback(() => {
         window.scrollTo({top: 0, behavior: 'smooth'});
@@ -53,7 +54,7 @@ function Navigation() {
                     <Link href="/articles/skills"><li>Программа-минимум</li></Link>
                     <Link href="/articles"><li>Статьи</li></Link>
                     <Link href="/about"><li>Об отряде</li></Link>
-                    <Link href="/register"><li>Заявка в отряд</li></Link>
+                    {!session && <Link href="/register"><li>Заявка в отряд</li></Link>}
                 </ul>
             </CSSTransition>
             <ul className={`${classes.list} ${classes.btns}`}>
