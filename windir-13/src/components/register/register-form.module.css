@@ -1,0 +1,153 @@
+.form-cont {
+    position: relative;
+}
+
+.form {
+    max-width: 1000px;
+}
+
+.form label {
+    cursor: pointer;
+}
+
+.hr {
+    margin-block: 1rem;
+}
+
+.control, .checkscontrol, .switch {
+    display: grid;
+    align-items: center;
+    min-height: 3rem;
+    gap: 0.6rem;
+}
+
+.control label, .checkscontrol label, .switch label {text-align: right;}
+
+.control, .switch {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.checkscontrol {
+    grid-template-columns: 1fr 2fr;
+}
+
+.input, .textarea {
+    border-radius: 5px;
+    border: 1px solid var(--dark);
+    background-color: transparent;
+    color: var(--dark);
+    outline: none;
+    padding: 0.2rem 0.5rem;
+    transition: border-color .3s, background-color .3s;
+}
+
+.textarea {
+    min-width: 100%;
+    min-height: 7rem;
+}
+
+.textarea:disabled {
+    background-color: #f7f7f7;
+    border-color: transparent;
+    resize: none;
+}
+
+.btn {
+    display: block;
+    color: var(--dark);
+    border-color: var(--dark);
+    margin: 1rem auto;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    margin-inline: 0.5rem;
+    position: relative;
+}
+
+.slider span {
+    display: block;
+    width: 4rem;
+    height: 2rem;
+    background-color: #ccc;
+    transition: .4s;
+    padding: 0;
+    margin: 0;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.slider span:before {
+    position: absolute;
+    content: "";
+    height: calc(2rem - 2px);
+    width: calc(2rem - 2px);
+    left: 1px;
+    top: 1px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.switch input:checked+.slider span {
+    background-color: rgb(0, 183, 255);
+}
+
+.switch input:checked+.slider span:before {
+    transform: translateX(2rem);
+}
+
+.checks {
+    margin: 1rem;
+}
+
+.checks label {
+    margin-inline: 0.6rem;
+    white-space: nowrap;
+}
+
+.checks input {margin-right: 0.3rem;}
+
+.invalid {
+    border-color: var(--red);
+}
+
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .control, .checkscontrol, .switch {
+        display: flex;
+        flex-wrap: wrap;
+        margin-block: 1rem;
+    }
+
+    .input, .textarea {
+        width: 100%;
+        order: 1;
+    }
+
+    .checks {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .checks label {
+        min-width: 50%;
+        margin: 0;
+        padding: 0 0.5rem;
+        text-align: left;
+    }
+}

@@ -1,10 +1,8 @@
-'use client';
-
 import { FormEventHandler, useCallback, useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import classes from './register-form.module.css';
 import specs from '@/util/specs';
 import projects from '@/util/projects';
-import Link from 'next/link';
 import { cleanRegisterFormData } from '@/util/register';
 import LoadingSpinner from '../ui/spinner';
 

@@ -1,0 +1,10 @@
+.about .image-cont h1 {
+    position: static;
+    color: var(--dark);
+    text-shadow: none;
+    font-size: 34px;
+}
+
+.img-cont {
+    height: 500px;
+}

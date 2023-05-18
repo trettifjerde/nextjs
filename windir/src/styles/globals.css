@@ -1,0 +1,188 @@
+:root {
+  --dark: #222325;
+  --light: #eeeeee;
+  --blue: rgb(0, 247, 255);
+  --red: #e50000;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, body, textarea {
+  font-family: oswald;
+  font-size: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-block: 2rem;
+  font-size: 34px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-block: 2rem;
+}
+
+h5 {
+  text-align: left;
+  font-size: 20px;
+  margin-block: 3rem 0.5rem;
+}
+
+.btn {
+  border-radius: 5px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color .3s;
+}
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.center {
+  text-align: center;
+}
+
+.sm {
+  font-size: 1rem;
+}
+
+.error-text {
+  color: var(--red);
+  font-size: 16px;
+}
+
+.img-cont {
+  position: relative;
+}
+
+.img-cont img {
+  object-fit: contain;
+}
+
+.attention {
+  margin-left: 2rem;
+  color: var(--red);
+  font-weight: bold;
+}
+
+.remark {
+  font-size: 1rem;
+  color: rgb(116, 116, 116);
+}
+
+.b {
+  font-weight: 600;
+}
+
+.slide {
+  visibility: hidden;
+}
+
+.slide-enter-done {
+  visibility: visible;
+  opacity: 1;
+}
+
+.slide-enter {
+  visibility: visible;
+  animation: slide-x .3s ease-in-out forwards;
+}
+
+.slide-exit {
+  visibility: visible;
+  animation: slide-x .3s ease-in-out reverse forwards;
+}
+
+.fade {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.fade-enter-done {
+  visibility: visible;
+}
+
+.fade-enter {
+  visibility: visible;
+  animation: fade-in .3s ease-in-out forwards;
+}
+.fade-exit {
+  visibility: visible;
+  animation: fade-in .3s ease-in-out reverse forwards;
+}
+
+@media (max-width: 850px) {
+  .slide-enter, .slide-exit {
+    animation-name: slide-y;
+  }
+}
+
+@keyframes slide-x {
+  0% {
+      opacity: 0;
+      transform: translateX(100%);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@keyframes slide-y {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+@font-face
+{
+    font-family: oswald;
+    src: url("/fonts/Oswald-Light.ttf");
+}
+
+@font-face
+{
+    font-family: logo-font;
+    src: url("/fonts/CvltRvneDemoBold-9Rp7.ttf");
+}
+
+@font-face
+{
+    font-family: error-code;
+    src: url("/fonts/Norse.otf");
+}

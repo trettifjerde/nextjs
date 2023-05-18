@@ -1,4 +1,3 @@
-'use client';
 import { useCallback, useState } from 'react';
 import classes from './games-entry.module.css';
 
