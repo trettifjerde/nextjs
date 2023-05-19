@@ -1,13 +1,16 @@
 import { dbUrl } from "@/util/appKeys";
 import { castToDbEntry, cleanRegisterFormData } from "@/util/register";
 import { MongoClient } from "mongodb";
+import { NextApiHandler } from "next";
 
-export async function handler(req: Request) {
+const handler : NextApiHandler = async (req, res) => {
     if (req.method === 'POST') {
-        const data = await req.json()
+        const data = req.body;
         const {cleanedData, errors} = cleanRegisterFormData(data);
+
         if (Object.keys(errors).length > 0) {
-            return new Response(JSON.stringify(errors), {status: 422})
+            res.status(422).json(errors);
+            return;
         }
         else {
             let client: MongoClient;
@@ -17,32 +20,39 @@ export async function handler(req: Request) {
             }
             catch (error) {
                 console.log(error);
-                return new Response(JSON.stringify({error: 'Ошибка при сохранении заявки. Повторите позже'}), {status: 503})
+                res.status(500).json({error: 'Ошибка при сохранении заявки. Повторите позже'});
+                return;
             }
 
             try {
                 const username = await client.db().collection('windir-users').findOne({username: cleanedData.username});
                 if (username) {
                     client.close();
-                    return new Response(JSON.stringify({error: 'Пользователь с таким позывным уже зарегистрирован'}), {status: 401})
+                   res.status(401).json({error: 'Пользователь с таким позывным уже зарегистрирован'});
+                   return;
                 }
 
                 const contact = await client.db().collection('windir-users').findOne({contact: cleanedData.contact});
                 if (contact) {
                     client.close();
-                    return new Response(JSON.stringify({error: 'Пользователь с такой контактной информацией уже зарегистрирован'}), {status: 401})
+                    res.status(401).json({error: 'Пользователь с такой контактной информацией уже зарегистрирован'})
+                    return;
                 }
 
                 const entry = await castToDbEntry(cleanedData);
                 await client.db().collection('windir-users').insertOne(entry);
                 client.close();
-                return new Response('', {status: 200})
+                res.status(200).json('');
+                return;
             }
             catch (error) {
                 console.log(error);
                 client.close();
-                return new Response(JSON.stringify({error: 'Ошибка при сохранении заявки. Повторите позже'}), {status: 503})
+                res.status(503).json({error: 'Ошибка при сохранении заявки. Повторите позже'});
+                return;
             }      
         }
     }
 }
+
+export default handler;

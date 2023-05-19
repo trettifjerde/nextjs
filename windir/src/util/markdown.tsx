@@ -1,6 +1,6 @@
 
 import Image from 'next/image';
-import classes from '@/components/page/styles/classes';
+import classes from '@/components/layout/page/styles/classes';
 
 const sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw";
 

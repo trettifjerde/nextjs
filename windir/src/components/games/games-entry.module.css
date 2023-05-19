@@ -20,7 +20,6 @@
 .cell {
     min-width: 3rem;
     flex-grow: 1;
-    cursor: pointer;
 }
 
 .on {

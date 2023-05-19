@@ -22,7 +22,9 @@ function UserEditForm({toggleEdit}: {toggleEdit: () => void}) {
         }
     }, [oldPwd, newPwd, newPwd2]);
 
-    return(<form onSubmit={handleSubmit}>
+    return(
+    <div className={classes.div}>
+        <form onSubmit={handleSubmit}>
         <p className={classes.error}>{error}</p>
         <input ref={oldPwd} className={classes.input} type="password" placeholder="Текущий пароль" />
         <input ref={newPwd} className={classes.input} type="password" placeholder="Новый пароль" />
@@ -31,6 +33,7 @@ function UserEditForm({toggleEdit}: {toggleEdit: () => void}) {
             <button className='btn'>Сменить</button>
             <button className='btn' type="button" onClick={toggleEdit}>Отмена</button>
         </div>
-    </form>)
+        </form>
+    </div>)
 }
 export default UserEditForm;

@@ -1,8 +1,15 @@
-import PageContent from '@/components/page/page-content';
 import RegisterForm from "@/components/register/register-form";
+import { PageData } from '@/util/types';
+import { GetStaticProps } from 'next';
 
-export default function Register() {
-    return <PageContent data={{image: '', title: 'Заявка в отряд', styles: ''}}>
-        <RegisterForm />
-    </PageContent>
+export default function Register({data}: {data: PageData}) {
+    return <RegisterForm />
 }
+
+export const getStaticProps: GetStaticProps<{data: PageData}> = async () => {
+    return {
+        props: {
+            data: {image: '', title: 'Заявка в отряд', styles: ''}
+        }
+    }
+};

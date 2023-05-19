@@ -52,12 +52,12 @@ function Navigation() {
             </ul>
             <CSSTransition in={menuOpen} timeout={300} classNames='slide'>
                 <ul className={`${classes.list} ${classes.menu} slide`}>
-                    <Link href="/games"><li>Игры</li></Link>
-                    <Link href="/articles/mods"><li>Настройка модов</li></Link>
-                    <Link href="/articles/skills"><li>Программа-минимум</li></Link>
-                    <Link href="/articles"><li>Статьи</li></Link>
-                    <Link href="/about"><li>Об отряде</li></Link>
-                    {!session && <Link href="/register"><li>Заявка в отряд</li></Link>}
+                    <Link scroll={false} href="/games"><li>Игры</li></Link>
+                    <Link scroll={false} href="/articles/mods"><li>Настройка модов</li></Link>
+                    <Link scroll={false} href="/articles/skills"><li>Программа-минимум</li></Link>
+                    <Link scroll={false} href="/articles"><li>Статьи</li></Link>
+                    <Link scroll={false} href="/about"><li>Об отряде</li></Link>
+                    {!session && <Link scroll={false} href="/register"><li>Заявка в отряд</li></Link>}
                 </ul>
             </CSSTransition>
             <ul className={`${classes.list} ${classes.btns}`}>

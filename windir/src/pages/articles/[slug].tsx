@@ -1,26 +1,27 @@
 import ReactMarkdown  from 'react-markdown';
-import PageContent from '@/components/page/page-content';
 import { getCustomRenderers } from '@/util/markdown';
-import getPage from '@/util/getPage';
-import { GetStaticPaths } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { PageData } from '@/util/types';
+import { getPages, getPage } from '@/util/pages';
 
 function Article({data, content}: {data: PageData, content: string}) {   
-    return <PageContent data={data}>
-        <ReactMarkdown components={getCustomRenderers(data.styles)}>{content}</ReactMarkdown>
-    </PageContent>
+    return <ReactMarkdown components={getCustomRenderers(data.styles)}>{content}</ReactMarkdown>
 }
 export default Article;
 
-export const getStaticPaths: GetStaticPaths = async({}) => {
-    return {
-        paths: [],
-        fallback: false
+export const getStaticProps: GetStaticProps<{data: PageData, content : string}> = async (context) => {
+    const slug = context.params?.slug;
+    if (typeof slug === 'string') {
+        const {data, content} = getPage(slug);
+        return {props: {data, content}};
     }
+    return {props: {data: {} as PageData, content: ''}};
 }
 
-export async function getStaticProps(context: {params: {slug: string}}) {
-    const slug = context.params.slug;
-    const {data, content} = getPage(slug + '.md');
-    return {data, content}
+export const getStaticPaths: GetStaticPaths = async() => {
+    const pages = getPages();
+    return {
+        paths: pages.map(page => ({params: {slug: page}})),
+        fallback: false
+    }
 }
