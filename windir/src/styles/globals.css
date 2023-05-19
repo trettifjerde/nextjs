@@ -22,7 +22,7 @@ a {
   text-decoration: none;
 }
 
-button, input, body, textarea {
+button, input, body, textarea, select {
   font-family: oswald;
   font-size: 20px;
 }

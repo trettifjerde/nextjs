@@ -1,23 +1,23 @@
 import { useCallback, useState } from "react";
-import classes from './user-menu.module.css';
-import UserEditForm from './user-edit-form';
+import formClasses from './user-menu.module.css';
 import { useSession, signOut } from "next-auth/react";
+import UserEditForm from "./user-edit";
 
 function UserMenu() {
-    const [formVisible, setFormVisible] = useState(false);
     const {data: session} = useSession();
+    const [editMode, setEditMode] = useState(false);
 
-    const toggleEdit = useCallback(() => setFormVisible(prev => !prev), [setFormVisible]);
+    const toggleEdit = useCallback(() => setEditMode(prev => !prev), [setEditMode]);
     const logoutHandler = useCallback(() => signOut({redirect: false}), []);
 
     return (<div>
-        <p className={classes.user}>Добро пожаловать<span>{session?.user?.name ? `, ${session.user.name}` : ''}</span></p>
-        {!formVisible && <div>
-                <button className='btn' type="button" onClick={toggleEdit}>Сменить пароль</button>
+        <p className={formClasses.user}>Добро пожаловать<span>{session ? `, ${session.user?.username}` : ''}</span></p>
+        {editMode && <UserEditForm toggleEdit={toggleEdit} />}
+        {!editMode && <div>
+                <button className='btn' type="button" onClick={toggleEdit}>Профиль</button>
                 <button className='btn' type="button" onClick={logoutHandler}>Выйти</button>
             </div>
         }
-        {formVisible && <UserEditForm toggleEdit={toggleEdit} />}
     </div>)
 }
 export default UserMenu;

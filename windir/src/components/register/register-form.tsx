@@ -6,7 +6,7 @@ import projects from '@/util/projects';
 import { cleanRegisterFormData } from '@/util/register';
 import LoadingSpinner from '../ui/spinner';
 
-export default function RegisterForm() {
+export default function RegisterForm({zones}: {zones: string[]}) {
 
 const [extraProjectVisible, setExtraProjectVisible] = useState(false);
 const [errors, setErrors] = useState<{[key: string]: string}>({});
@@ -146,7 +146,9 @@ return <>
 
             <div className={classes.control}>
                 <label htmlFor="UTC">Часовой пояс</label>
-                <select className={classes.input} id="utc" name="utc"></select>
+                <select className={classes.input} id="utc" name="utc">
+                    {zones.map(zone => <option key={zone}>{zone}</option>)}
+                </select>
             </div>
 
             <hr className={classes.hr}/>

@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import { Session, User } from "next-auth";
 
 export type PageData = {
     title: string,

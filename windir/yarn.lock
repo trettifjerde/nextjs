@@ -938,10 +938,10 @@ tslib@^2.4.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.1.tgz#f2ad78c367857d54e49a0ef9def68737e1a67b21"
   integrity sha512-KaI6gPil5m9vF7DKaoXxx1ia9fxS4qG5YveErRRVknPDXXriu5M8h48YRjB6h5ZUOKuAKlSJYb0GaDe8I39fRw==
 
-typescript@5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.4.tgz#b217fd20119bd61a94d4011274e0ab369058da3b"
-  integrity sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==
+typescript@^5.1.1-rc:
+  version "5.1.1-rc"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.1.1-rc.tgz#7be6e85bb4ad36e07e0125e501eb08ed3a6e3769"
+  integrity sha512-+yHTPe5QCxw5cgN+B81z+k65xTHcwNCRwJN7OGVUe3srPULTZHF7J9QCgrptL7F8mrO7gmsert7XrMksAjutRw==
 
 unified@^10.0.0:
   version "10.1.2"

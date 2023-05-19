@@ -12,6 +12,18 @@ export const authOptions : AuthOptions = {
     jwt: {
         maxAge: 60 * 60,
     },
+    callbacks: {
+        jwt({token, user}) {
+            if (user)
+                token.user = user;
+            return token;
+        },
+        session: async({session, token}) => {
+            if (token)
+                session.user = token.user as User
+            return session;
+        }
+    },
     secret: process.env.NEXTAUTH_SECRET,
     providers: [Credentials({
         name: '',
@@ -19,7 +31,7 @@ export const authOptions : AuthOptions = {
             username: {type: 'text', placeholder: 'Позывной'},
             password: {type: 'password', placeholder: 'Пароль'}
         },
-        async authorize(credentials, req): Promise<User> {
+        async authorize(credentials) {
 
             if (!credentials || !credentials.username || !credentials.password) {
                 throw new Error('Заполните поля');
@@ -49,8 +61,8 @@ export const authOptions : AuthOptions = {
             if (!user || !await isCorrectPassword(credentials.password, user.password)) {
                 throw new Error('Неверный позывной или пароль');
             }
-
-            return {id: user._id.toString(), name: user.username};          
+            console.log(user.username, user.utc);
+            return {id: user._id.toString(), username: user.username, utc: user.utc};          
         }
     })]
 };
