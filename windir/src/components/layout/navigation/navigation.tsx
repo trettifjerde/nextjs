@@ -58,6 +58,7 @@ function Navigation() {
                     <Link scroll={false} href="/articles"><li>Статьи</li></Link>
                     <Link scroll={false} href="/about"><li>Об отряде</li></Link>
                     {!session && <Link scroll={false} href="/register"><li>Заявка в отряд</li></Link>}
+                    {session && session.user?.username === 'admin' && <Link scroll={false} href="/admin"><li>Управление</li></Link> }
                 </ul>
             </CSSTransition>
             <ul className={`${classes.list} ${classes.btns}`}>

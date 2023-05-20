@@ -70,5 +70,6 @@ export async function castToDbEntry(data: any) {
     const hashedPassword = await hashPassword(password);
     dbEntry.password = hashedPassword;
     dbEntry.isActive = false;
+    dbEntry.isNew = true;
     return dbEntry;
 }

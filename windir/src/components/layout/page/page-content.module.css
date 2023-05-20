@@ -12,6 +12,7 @@
 .content section {
     max-width: 1000px;
     margin-inline: auto;
+    width: 100%;
 }
 
 .content ul, .content ol {

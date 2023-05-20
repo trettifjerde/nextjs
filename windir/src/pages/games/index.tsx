@@ -1,6 +1,6 @@
 import GameEntry from "@/components/games/game-entry";
 import { GetStaticProps } from "next";
-import { PlayerGames } from "@/util/types";
+import { PageData, PlayerGames } from "@/util/types";
 import { MongoClient } from "mongodb";
 import { dbUrl } from "@/util/appKeys";
 import { useSession } from "next-auth/react";
@@ -20,7 +20,7 @@ export default function Games({players}: {players: {[key: string]: boolean[]}}) 
     </>
 }
 
-export const getStaticProps: GetStaticProps<{players: PlayerGames}> = async(context) => {
+export const getStaticProps: GetStaticProps<{players: PlayerGames, data: PageData}> = async(context) => {
 
     const props = {
         data: {image: '', title: 'Игры', styles: 'games'},

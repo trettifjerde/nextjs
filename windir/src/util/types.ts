@@ -15,10 +15,12 @@ export type WindirEntry = {
     username: string,
     dob: string,
     contact: string,
+    utc: string,
     hours: number,
     teams: string,
     password: string,
-    isActive: boolean
+    isActive: boolean,
+    isNew: boolean
 }
 
 export type WindirUser = {
@@ -27,9 +29,11 @@ export type WindirUser = {
     projects: string[],
     username: string,
     dob: string,
+    utc: string,
     contact: string,
     hours: number,
     teams: string,
     password: string,
     isActive: boolean
+    isNew: boolean
 }

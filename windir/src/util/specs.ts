@@ -1,4 +1,4 @@
-const specs = {
+const specs: {[key: string]: string} = {
     grenadier: "Гранатометчик", 
     marksman: "Снайпер", 
     infantry: "Пехота"

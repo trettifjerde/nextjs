@@ -11,6 +11,8 @@ export function castToUser(entry: WindirEntry) {
         hours: entry.hours,
         teams: entry.teams,
         password: entry.password,
-        isActive: entry.isActive
+        isActive: entry.isActive,
+        isNew: entry.isNew,
+        utc: entry.utc
     } as WindirUser
 }
