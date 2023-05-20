@@ -19,7 +19,7 @@ const handler : NextApiHandler = async (req, res) => {
                 client = await MongoClient.connect(dbUrl);
             }
             catch (error) {
-                console.log(error);
+                console.log('first try', error);
                 res.status(500).json({error: 'Ошибка при сохранении заявки. Повторите позже'});
                 return;
             }
@@ -46,7 +46,7 @@ const handler : NextApiHandler = async (req, res) => {
                 return;
             }
             catch (error) {
-                console.log(error);
+                console.log('second try', error);
                 client.close();
                 res.status(503).json({error: 'Ошибка при сохранении заявки. Повторите позже'});
                 return;

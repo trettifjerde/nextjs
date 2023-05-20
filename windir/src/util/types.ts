@@ -1,5 +1,4 @@
 import { ObjectId } from "mongodb";
-import { Session, User } from "next-auth";
 
 export type PageData = {
     title: string,
@@ -18,5 +17,19 @@ export type WindirEntry = {
     contact: string,
     hours: number,
     teams: string,
-    password: string
+    password: string,
+    isActive: boolean
+}
+
+export type WindirUser = {
+    id: string,
+    specs: string[],
+    projects: string[],
+    username: string,
+    dob: string,
+    contact: string,
+    hours: number,
+    teams: string,
+    password: string,
+    isActive: boolean
 }

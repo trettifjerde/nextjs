@@ -69,8 +69,6 @@ export async function castToDbEntry(data: any) {
     delete dbEntry.password2;
     const hashedPassword = await hashPassword(password);
     dbEntry.password = hashedPassword;
-
-    dbEntry.games = [false, false, false, false, false, false, false, false, false, false, false, false, false, false];
     dbEntry.isActive = false;
     return dbEntry;
 }

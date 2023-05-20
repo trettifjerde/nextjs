@@ -22,20 +22,30 @@
     flex-grow: 1;
 }
 
-.on {
-    background-color: #a3ffa7;;
+.isuser .cell {
+    cursor: pointer;
 }
-.on:hover {
-    background-color: #d1ffd2;
+
+.on {
+    background-color: #a3ffdd;;
 }
 
 .off {
-    background-color: #ffc2c8;
+    background-color: #ffd7e6;
 }
-.off:hover {
-    background-color: #ffdade;
+
+.isuser .on:hover {
+    background-color: #ffd7e6;
+}
+.isuser .off:hover {
+    background-color: #a3ffdd;
 }
 
 .pending {
     background-color: #fff9c2;
+}
+
+.isuser .username {
+    background-color: var(--dark);
+    color: white;
 }
