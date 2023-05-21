@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import classes from './game-entry.module.css';
+import { fetchData } from '@/util/fetch';
 
 export default function UserGameEntry({username, info, setError}: {
     username: string, info: boolean[], setError: Dispatch<SetStateAction<string>>
@@ -13,12 +14,7 @@ export default function UserGameEntry({username, info, setError}: {
 
         const updGames = games.map((game, j) => i === j ? !game : game);
 
-        const res = await fetch('/api/games', {
-            method: 'POST',
-            body: JSON.stringify({username, games: updGames}),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .catch(e => new Response(JSON.stringify({error: 'Ошибка доступа к базе данных. Проверьте подключение к интернету'}), {status: 500}));
+        const res = await fetchData('/api/games', {username, games: updGames});
 
         if (res.ok) setGames(prev => prev.map((game, j) => i === j ? !game : game));
         

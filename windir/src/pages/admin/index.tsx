@@ -9,10 +9,11 @@ import { MouseEvent, useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import UsersTable from "@/components/admin/users";
+import { fetchData } from "@/util/fetch";
+import Spoiler from "@/components/ui/spoiler";
 
 export default function Admin({users : u}: {users: WindirUser[]}) {
 
-    console.log(u);
     const [users, setUsers] = useState(u.filter(user => !user.isNew));
     const [newUsers, setNewUsers] = useState(u.filter(user => user.isNew));
 
@@ -27,14 +28,7 @@ export default function Admin({users : u}: {users: WindirUser[]}) {
         console.log(user);
 
         if (user) {
-            const res = await fetch('/api/activate', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({username: user.username, isActive: !user.isActive})
-            })
-            .catch(error => {
-                return new Response(JSON.stringify({error: 'Повторите позже'}), {status: 500})
-            });
+            const res = await fetchData('/api/activate', {username: user.username, isActive: !user.isActive});
 
             if (res.ok) {
                 setUsers(prev => {
@@ -58,12 +52,7 @@ export default function Admin({users : u}: {users: WindirUser[]}) {
     const acceptUser = useCallback(async(e: MouseEvent, id: string) => {
         (e.target as HTMLButtonElement).disabled = true;
 
-        const res = await fetch('/api/accept', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id})
-        })
-        .catch(e => (new Response(JSON.stringify({error: 'Повторите позже'}), {status: 500})));
+        const res = await fetchData('/api/accept', {id});
 
         if (res.ok) {
             const user = newUsers.find(u => u.id === id)!;
@@ -90,10 +79,16 @@ export default function Admin({users : u}: {users: WindirUser[]}) {
 
     return <>
         <div className="error-text center">{error}</div>
-        <h2>Новые заявки</h2>
-        <UsersTable users={newUsers} clickHandler={acceptUser} getText={getAcceptText} />
-        <h2>Игроки</h2>
-        <UsersTable users={users} clickHandler={toggleActive} getText={getActiveText} />
+        <Spoiler header="Новые заявки" initial={true}>
+            <UsersTable users={newUsers} clickHandler={acceptUser} getText={getAcceptText} />
+        </Spoiler>
+        <Spoiler header="Активные игроки" initial={false}>
+            <UsersTable users={users.filter(user => user.isActive)} clickHandler={toggleActive} getText={getActiveText} />
+        </Spoiler>
+        <Spoiler header="Неактивные игроки" initial={false}>
+            <UsersTable users={users.filter(user => !user.isActive)} clickHandler={toggleActive} getText={getActiveText} />
+
+        </Spoiler>
     </>
 }
 

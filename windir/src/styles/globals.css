@@ -54,6 +54,7 @@ h5 {
   border-radius: 10px;
   cursor: pointer;
   transition: background-color .3s;
+  white-space: nowrap;
 }
 .btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
@@ -67,10 +68,11 @@ h5 {
 
 .btn-dark:hover {
   color: var(--dark);
-  background-color: transparent;
+  background-color: var(--light);
 }
 
 button.btn:disabled, button.btn:disabled:hover {
+  cursor: default;
   color: gray !important;
   background-color: transparent !important;
   border-color: gray !important;
@@ -148,6 +150,18 @@ button.btn:disabled, button.btn:disabled:hover {
 .fade-exit {
   visibility: visible;
   animation: fade-in .3s ease-in-out reverse forwards;
+}
+
+.spoiler-enter {
+  display: block !important;
+  animation: slide-y .3s ease-in-out forwards;
+}
+.spoiler-enter-done {
+  display: block !important;
+}
+.spoiler-exit { 
+  display: block !important;
+  animation: slide-y .3s ease-in-out reverse forwards;
 }
 
 @media (max-width: 850px) {

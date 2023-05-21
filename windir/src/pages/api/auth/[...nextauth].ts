@@ -1,5 +1,6 @@
 import { dbUrl } from "@/util/appKeys";
 import { isCorrectPassword } from "@/util/auth";
+import { WindirEntry } from "@/util/types";
 import { Document, MongoClient } from "mongodb";
 import { AuthOptions, User } from "next-auth";
 import NextAuth from "next-auth/next";
@@ -61,7 +62,9 @@ export const authOptions : AuthOptions = {
             if (!user || !await isCorrectPassword(credentials.password, user.password)) {
                 throw new Error('Неверный позывной или пароль');
             }
-            console.log(user.username, user.utc);
+            if (user.username !== 'admin' && !user.isActive) {
+                throw new Error('Доступ к профилю не активирован');
+            }
             return {id: user._id.toString(), username: user.username, utc: user.utc};          
         }
     })]

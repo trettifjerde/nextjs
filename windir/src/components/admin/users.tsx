@@ -1,11 +1,25 @@
 import { WindirUser } from '@/util/types';
 import classes from './users.module.css';
-import { MouseEvent } from 'react';
+import { MouseEvent, useCallback } from 'react';
 import specs from '@/util/specs';
 import projects from '@/util/projects';
+import { fetchData } from '@/util/fetch';
 
 export default function UsersTable({users, clickHandler, getText}: {
     users: WindirUser[], clickHandler: (e: MouseEvent, id: string) => void, getText: (user: WindirUser) => string}) {
+
+    const resetPassword = useCallback(async(e: MouseEvent, id: string) => {
+        const btn = e.target as HTMLButtonElement;
+        
+        btn.disabled = true;
+        btn.classList.remove('error');
+
+        const res = await fetchData('/api/reset', {id});
+        if (!res.ok) btn.classList.add('error');
+
+        btn.disabled = false;
+    }, []);
+
     return (<>
         {users.length > 0 && <table className={classes.table}>
             <thead>
@@ -31,7 +45,10 @@ export default function UsersTable({users, clickHandler, getText}: {
                     <td>{user.specs.map(s => <p key={s}>{specs[s]}</p>)}</td>
                     <td>{user.teams}</td>
                     <td>{user.projects.map(p => <p key={p}>{projects[p]}</p>)}</td>
-                    <td><button className="btn btn-dark" onClick={e => clickHandler(e, user.id)}>{getText(user)}</button></td>
+                    <td>
+                        <button className="btn btn-dark" onClick={e => clickHandler(e, user.id)}>{getText(user)}</button>
+                        <button className='btn btn-dark' onClick={e => resetPassword(e, user.id)}>Сбросить пароль</button>
+                        </td>
                 </tr>)}
             </tbody>
         </table>}

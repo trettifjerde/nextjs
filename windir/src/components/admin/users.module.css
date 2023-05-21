@@ -2,14 +2,12 @@
     width: 100%;
     border: 1px solid var(--dark);
     border-collapse: collapse;
-}
-
-.table th {
-    text-align: start;
+    text-align: center;
+    table-layout: auto;
 }
 
 .table th, .table td {
-    padding: 0.3rem 0.5rem;
+    padding: 0.25rem 0.5rem;
     border: 1px solid var(--dark);
 }
 

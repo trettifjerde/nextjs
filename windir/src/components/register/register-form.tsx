@@ -5,6 +5,7 @@ import specs from '@/util/specs';
 import projects from '@/util/projects';
 import { cleanRegisterFormData } from '@/util/register';
 import LoadingSpinner from '../ui/spinner';
+import { fetchData } from '@/util/fetch';
 
 export default function RegisterForm({zones}: {zones: string[]}) {
 
@@ -53,12 +54,7 @@ const submitHandler: FormEventHandler = useCallback(async(e) => {
     }
     else {
         setLoading(true);
-        const result = await fetch('/api/register', {
-            method: 'POST',
-            body: JSON.stringify(cleanedData),
-            headers: {'Content-Type': 'application/json'}
-        })
-        .catch(err => (new Response('', {status: 404})));
+        const result = await fetchData('/api/register', {cleanedData});
 
         if (result.ok) {
             setLoading(false);
@@ -70,7 +66,7 @@ const submitHandler: FormEventHandler = useCallback(async(e) => {
                 const errs = await result.json();
                 setErrors(errs);
             }
-            else if (result.status === 503 || result.status === 401) {
+            else if (result.status === 503 || result.status === 500 || result.status === 401) {
                 const {error : err} = await result.json();
                 setError(err);
             }
