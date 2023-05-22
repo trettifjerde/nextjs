@@ -20,7 +20,8 @@ export type WindirEntry = {
     teams: string,
     password: string,
     isActive: boolean,
-    isNew: boolean
+    isNew: boolean,
+    newUsername?: string
 }
 
 export type WindirUser = {
@@ -35,5 +36,8 @@ export type WindirUser = {
     teams: string,
     password: string,
     isActive: boolean
-    isNew: boolean
+    isNew: boolean,
+    newUsername?: string
 }
+
+export type UsernameChangeEntry = {id: string, oldN: string, newN: string}

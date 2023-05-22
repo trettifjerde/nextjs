@@ -7,12 +7,10 @@ import { dbUrl } from "@/util/appKeys";
 const handler: NextApiHandler = async(req, res) => {
     if (req.method === 'POST') {
         const data = req.body;
-        console.log(data);
         const session = await getServerSession(req, res, authOptions);
+        console.log(session);
         
-        if (session?.user?.username !== data.username) {
-            console.log(session?.user?.username);
-            console.log(data.username);
+        if (session?.user?.username !== 'admin' && session?.user?.username !== data.username) {
             res.status(401).json({error: 'Доступ к редактированию запрещен'})
             return;
         }
@@ -29,7 +27,7 @@ const handler: NextApiHandler = async(req, res) => {
         }
 
         try {
-            const updEntry = await client.db().collection('windir-users').updateOne({username: data.username}, {$set: {games: data.games}});
+            const updEntry = await client.db().collection('windir-games').updateOne({username: data.username}, {$set: {games: data.games}});
             console.log (updEntry);
             res.status(200).json('');
             client.close();

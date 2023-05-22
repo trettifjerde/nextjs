@@ -14,7 +14,10 @@ export const authOptions : AuthOptions = {
         maxAge: 60 * 60,
     },
     callbacks: {
-        jwt({token, user}) {
+        jwt({token, user, trigger, session}) {
+            if (trigger === 'update' && token.user && session.utc) {
+                token.user = {...token.user, utc: session.utc};
+            }
             if (user)
                 token.user = user;
             return token;

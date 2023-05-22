@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import formClasses from './user-menu.module.css';
 import { useSession, signOut } from "next-auth/react";
 import UserEditForm from "./user-edit";
+import { CSSTransition } from "react-transition-group";
 
 function UserMenu() {
     const {data: session} = useSession();
@@ -12,7 +13,9 @@ function UserMenu() {
 
     return (<div>
         <p className={formClasses.user}>Добро пожаловать<span>{session ? `, ${session.user?.username}` : ''}</span></p>
-        {editMode && <UserEditForm toggleEdit={toggleEdit} />}
+        <CSSTransition in={editMode} timeout={300} classNames="fade" mountOnEnter unmountOnExit>
+            <UserEditForm toggleEdit={toggleEdit} />
+        </CSSTransition>
         {!editMode && <div>
                 <button className='btn' type="button" onClick={toggleEdit}>Профиль</button>
                 <button className='btn' type="button" onClick={logoutHandler}>Выйти</button>

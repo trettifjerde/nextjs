@@ -16,17 +16,21 @@
 .header h2 { margin: 0;}
 
 .header span { 
+    font-family: logo-font;
     transition: transform .3s;
-    transform: rotate(0deg);
+    transform: rotate(180deg) scale(1);
 }
 
 .open .header span {
-    transform: rotate(180deg);
+    transform: rotate(0deg);
 }
 
 .header:hover {
     background-color: rgba(100, 100, 100, 0.205);
 }
+
+.header:hover span { transform: rotate(180deg) scale(1.5);}
+.open .header:hover span {transform: rotate(0) scale(1.5);}
 
 .body {
     max-height: 600px;

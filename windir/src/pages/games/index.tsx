@@ -1,5 +1,5 @@
 import GameEntry from "@/components/games/game-entry";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { PageData, PlayerGames } from "@/util/types";
 import { MongoClient } from "mongodb";
 import { dbUrl } from "@/util/appKeys";
@@ -13,14 +13,14 @@ export default function Games({players}: {players: {[key: string]: boolean[]}}) 
 
     return <>
         <div className="error-text center">{error}</div>
-        {Object.keys(players).length > 0 && Object.entries(players).map(([username, days]) => session?.user?.username === username ?
+        {Object.keys(players).length > 0 && Object.entries(players).map(([username, days]) => (session?.user?.username === username || session?.user?.username === 'admin') ?
             <UserGameEntry key={username} username={username} info={days} setError={setError}/> :
             <GameEntry key={username} username={username} games={days} />)}
         {Object.keys(players).length === 0 && <div className="center">Нет данных</div>}
     </>
 }
 
-export const getStaticProps: GetStaticProps<{players: PlayerGames, data: PageData}> = async(context) => {
+export const getServerSideProps: GetServerSideProps<{players: PlayerGames, data: PageData}> = async(context) => {
 
     const props = {
         data: {image: '', title: 'Игры', styles: 'games'},

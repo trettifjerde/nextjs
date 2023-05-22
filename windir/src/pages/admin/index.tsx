@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { MongoClient } from "mongodb";
 import { dbUrl } from "@/util/appKeys";
-import { PageData, WindirEntry, WindirUser } from "@/util/types";
+import { PageData, UsernameChangeEntry, WindirEntry, WindirUser } from "@/util/types";
 import { castToUser } from "@/util/admin";
 import { MouseEvent, useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -11,11 +11,13 @@ import { useRouter } from "next/router";
 import UsersTable from "@/components/admin/users";
 import { fetchData } from "@/util/fetch";
 import Spoiler from "@/components/ui/spoiler";
+import UsernamesTable from "@/components/admin/usernames";
 
-export default function Admin({users : u}: {users: WindirUser[]}) {
+export default function Admin({users : u, changeRequests: cR}: {users: WindirUser[], changeRequests: UsernameChangeEntry[]}) {
 
     const [users, setUsers] = useState(u.filter(user => !user.isNew));
     const [newUsers, setNewUsers] = useState(u.filter(user => user.isNew));
+    const [changeRequests, setChangeRequests] = useState(cR);
 
     const [error, setError] = useState('');
     const {status} = useSession();
@@ -23,6 +25,7 @@ export default function Admin({users : u}: {users: WindirUser[]}) {
 
     const toggleActive = useCallback(async(e: MouseEvent, id: string) => {
         (e.target as HTMLButtonElement).disabled = true;
+        setError("");
 
         const user = users.find(u => u.id === id);
         console.log(user);
@@ -51,6 +54,7 @@ export default function Admin({users : u}: {users: WindirUser[]}) {
 
     const acceptUser = useCallback(async(e: MouseEvent, id: string) => {
         (e.target as HTMLButtonElement).disabled = true;
+        setError("");
 
         const res = await fetchData('/api/accept', {id});
 
@@ -68,6 +72,23 @@ export default function Admin({users : u}: {users: WindirUser[]}) {
         (e.target as HTMLButtonElement).disabled = false;
     }, [newUsers, setNewUsers, setUsers, setError]);
 
+    const manageUsernameChange = useCallback(async(e: MouseEvent, id: string, confirm: boolean) => {
+        const btn = e.target as HTMLButtonElement;
+        btn.disabled = true;
+        setError("");
+
+        const res = await fetchData('/api/confirmusername', {id, confirm});
+        if (res.ok) {
+            setChangeRequests(prev => (prev.filter(r => r.id !== id)))
+        }
+        else {
+            const {error} = await res.json();
+            setError(error);
+        }
+
+        btn.disabled = false;
+    }, [setChangeRequests, setError]);
+
     const getAcceptText = useCallback(() => ('Принять'), []);
     const getActiveText = useCallback((user: WindirUser) => (user.isActive ? 'Деактивировать' : 'Активировать'), []);
 
@@ -79,8 +100,11 @@ export default function Admin({users : u}: {users: WindirUser[]}) {
 
     return <>
         <div className="error-text center">{error}</div>
-        <Spoiler header="Новые заявки" initial={true}>
+        <Spoiler header="Новые заявки в отряд" initial={true}>
             <UsersTable users={newUsers} clickHandler={acceptUser} getText={getAcceptText} />
+        </Spoiler>
+        <Spoiler header="Заявки на смену позывного" initial={true}>
+            <UsernamesTable users={changeRequests} clickHandler={manageUsernameChange} />
         </Spoiler>
         <Spoiler header="Активные игроки" initial={false}>
             <UsersTable users={users.filter(user => user.isActive)} clickHandler={toggleActive} getText={getActiveText} />
@@ -111,11 +135,14 @@ export const getServerSideProps: GetServerSideProps = async({req, res}) => {
 
         try {
             const dbUsers = await client.db().collection<WindirEntry>('windir-users').find().toArray();
-            const users = dbUsers.map(user => castToUser(user))
+            const users = dbUsers.map(user => castToUser(user));
+            const changeRequests = await client.db().collection('windir-users').find({newUsername: {$exists: true}}).toArray();
+
             client.close();
             return {
                 props: {
                     users,
+                    changeRequests: changeRequests.map(r => ({id: r._id.toString(), oldN: r.username, newN: r.newUsername})),
                     data: {image: '', styles: 'admin', title: 'Панель управления'} as PageData
                 }
             }
@@ -123,6 +150,7 @@ export const getServerSideProps: GetServerSideProps = async({req, res}) => {
         catch (error) {
             console.log(error);
             client.close();
+            return {props: {data: {image: '', styles: 'admin', title: 'Панель управления'} as PageData}}
         }
 
     }

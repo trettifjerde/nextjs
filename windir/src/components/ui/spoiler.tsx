@@ -11,7 +11,7 @@ export default function Spoiler({header, children, initial}: {header: string, ch
         <div className={`${classes.cont} ${open ? classes.open : ''}`}>
             <div className={classes.header} onClick={toggleSpoiler}>
                 <h2>{header}</h2>
-                <span>v</span>
+                <span>t</span>
             </div>
             <div className={classes.body}>
                 <CSSTransition in={open} timeout={300} classNames="spoiler" appear={initial}>

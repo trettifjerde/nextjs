@@ -82,6 +82,8 @@ button.btn:disabled, button.btn:disabled:hover {
   text-align: center;
 }
 
+.right {text-align: right;}
+
 .sm {
   font-size: 1rem;
 }
@@ -151,6 +153,12 @@ button.btn:disabled, button.btn:disabled:hover {
   visibility: visible;
   animation: fade-in .3s ease-in-out reverse forwards;
 }
+
+.fade-enter .slide-down {
+  animation: slide-y .3s ease-in-out forwards;
+}
+
+.fade-exit .slide-down { animation: slide-y .3s ease-in-out reverse forwards;}
 
 .spoiler-enter {
   display: block !important;

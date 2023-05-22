@@ -1,7 +1,7 @@
 import { WindirEntry, WindirUser } from "./types";
 
 export function castToUser(entry: WindirEntry) {
-    return {
+    const user : WindirUser = {
         id: entry._id.toString(),
         specs: entry.specs,
         projects: entry.projects,
@@ -13,6 +13,10 @@ export function castToUser(entry: WindirEntry) {
         password: entry.password,
         isActive: entry.isActive,
         isNew: entry.isNew,
-        utc: entry.utc
-    } as WindirUser
+        utc: entry.utc,
+    };
+
+    if (entry.newUsername) user.newUsername = entry.newUsername;
+    
+    return user;
 }
