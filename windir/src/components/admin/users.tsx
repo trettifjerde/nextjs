@@ -37,7 +37,7 @@ export default function UsersTable({users, clickHandler, getText}: {
             </thead>
             <tbody>
                 {users.map(user => <tr key={user.id}>
-                    <td>{user.username}</td>
+                    <td className={classes.sticky}>{user.username}</td>
                     <td>{user.contact}</td>
                     <td>{new Date(user.dob).toLocaleDateString('ru-RU', {month: '2-digit', day: 'numeric', year: 'numeric'})}</td>
                     <td>{user.utc.replace(/\w+\//, '')}</td>

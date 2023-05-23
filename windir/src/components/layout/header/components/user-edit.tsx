@@ -27,18 +27,18 @@ export default function UserEditForm({toggleEdit}: {toggleEdit: () => void}) {
         e.preventDefault();
         const btn = (e.target as HTMLFormElement).querySelector('button')!;
 
-        setPassRes({text: 'Идет запрос...', clName: 'pending'});
         btn.disabled = true;
-
+        
         const old = oldPwd.current!.value;
         const newP = newPwd.current!.value;
         const newP2 = newPwd2.current!.value;
-
+        
         if (!old) oldPwd.current!.focus()
         else if (!newP) newPwd.current!.focus();
         else if (!newP2) newPwd2.current!.focus();
         else if (newP !== newP2) setPassRes({text: 'Пароли не совпадают', clName: 'error-text'});
         else {
+            setPassRes({text: 'Идет запрос...', clName: 'pending'});
             const res = await fetchData('/api/reset', {password: newP, oldPassword: old});
             if (res.ok) {
                 setPassRes({text: 'Пароль успешно изменен', clName: 'ok-text'});
@@ -82,27 +82,30 @@ export default function UserEditForm({toggleEdit}: {toggleEdit: () => void}) {
 
         const btn = (e.target as HTMLFormElement).querySelector('button')!;
         btn.disabled = true;
-        setNameRes({text: 'Идет запрос...', clName: 'pending'});
-
+        
         const username = nameRef.current!.value.trim();
         if (!username) {
             nameRef.current!.focus();
             return;
         }
-
-        const res = await fetchData('/api/username', {username});
-        if (res.ok) setNameRes({text: 'Запрос на смену позывного отправлен', clName: 'ok-text'});
-        else {
-            const {error} = await res.json();
-            setNameRes({text: error, clName: 'error-text'});
+        else if (username === session?.user?.username) {
+            setNameRes({text: 'Новый позывной соответствует текущему', clName: 'error-text'});
         }
-
+        else {
+            setNameRes({text: 'Идет запрос...', clName: 'pending'});
+            const res = await fetchData('/api/username', {username});
+            if (res.ok) setNameRes({text: 'Запрос на смену позывного отправлен', clName: 'ok-text'});
+            else {
+                const {error} = await res.json();
+                setNameRes({text: error, clName: 'error-text'});
+            }
+        }
         btn.disabled = false;
     }, [nameRef, setNameRes]);
 
     useEffect(() => {
         async function checkNameStatus() {
-            const res = await fetchData('api/username');
+            const res = await fetchData('/api/username');
             if (res.ok) {
                 const {name} = await res.json();
                 if (name)

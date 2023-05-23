@@ -45,14 +45,21 @@
 
 @media (max-width: 1000px) {
     .content {
-        padding-block: 3rem;
+        padding: 3rem 2rem;
         margin-inline: 1.5rem;
     }
 }
 
 @media (max-width: 600px) {
     .content {
-        padding-block: 1rem;
+        padding: 1rem;
         margin-inline: 0.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .content {
+        padding-block: 0.5rem;
+        margin-inline: 0.2rem;
     }
 }

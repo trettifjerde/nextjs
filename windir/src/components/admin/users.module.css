@@ -1,7 +1,5 @@
 .table {
     width: 100%;
-    border: 1px solid var(--dark);
-    border-collapse: collapse;
     text-align: center;
     table-layout: auto;
 }
@@ -11,12 +9,22 @@
     border: 1px solid var(--dark);
 }
 
-.table td:first-of-type {
+.sticky {
     font-weight: bold;
+    position: sticky;
+    left: 0;
+    background-color: var(--light);
+    border: 1px solid var(--dark) !important;
 }
 
 .change-entry {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+}
+
+@media (max-width: 600px) {
+    .table th, .table td {
+        border: 1px solid transparent;
+    }
 }

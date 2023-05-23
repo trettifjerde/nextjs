@@ -20,7 +20,7 @@ export function getCustomRenderers(styles?: string) {
         img(image: any) {
             const {src, alt} = image.node.properties;
             return <div className={`img-cont ${styles ? classes[styles]['img-cont'] : ''}`}>
-                <Image src={src} alt={alt} fill />
+                <Image src={src} alt={alt} fill sizes={sizes} />
             </div>
         },
         li(item: any) {

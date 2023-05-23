@@ -7,12 +7,34 @@
     color: white;
 }
 
-.logo {
+.logo, .error {
+    font-size: 15rem;
+    color: white;
     padding-top: 20vh;
+}
+
+.logo {
+    font-family: logo-font;
+}
+
+.error {
+    font-family: error-code;
 }
 
 @media (max-width: 850px) {
     .header {
         background-attachment: fixed;
+    }
+}
+
+@media (max-width: 500px) {
+    .logo, .error {
+        font-size: 10rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .logo, .error {
+        font-size: 7rem;
     }
 }

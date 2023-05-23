@@ -1,10 +1,13 @@
 .image-cont {
     position: relative;
     margin-block: 3rem;
+    height: 50vh;
+    width: 100%;
 }
 
 .image-cont img {
     object-fit: contain;
+    border-radius: 5px;
 }
 
 .image-cont h1 {
@@ -21,4 +24,22 @@
     margin: 0;
     font-size: 3rem;
     text-shadow: -1px 0 5px var(--dark), 0 1px 5px var(--dark), 1px 0 5px var(--dark), 0 -1px 5px var(--dark);
+    z-index: 1;
+}
+
+@media (max-width: 600px) {
+
+    .image-cont {
+        height: 30vh;
+    }
+
+    .image-cont img {
+        object-fit: cover;
+    }
+    .image-cont h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 400px) {
 }

@@ -1,0 +1,38 @@
+.articles section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-block: 3rem;
+}
+
+.articles img {
+    filter: contrast(75%); transition: all .3s;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 3px gray;
+}
+
+.articles a.link {
+    position: relative;
+    max-width: 400px;
+    padding: 0 !important;
+    margin:  0 !important;
+    background-color: transparent !important;
+}
+
+.articles a.link div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-shadow: -1px 0 6px var(--dark), 0 1px 6px var(--dark), 1px 0 6px var(--dark), 0 -1px 6px var(--dark);
+}
+
+.articles a.link:hover img {
+    filter: none;
+}

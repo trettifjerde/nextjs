@@ -26,12 +26,12 @@ export default function UserGameEntry({username, info, setError}: {
         
     }, [games, setGames, setPending]);
 
-    return (<div className={`${classes.entry} ${classes.isuser}`}>
-        <div className={classes.username}>{username}</div>
+    return (<tr className={classes.isuser}>
+        <td className={classes.username}>{username}</td>
         {games.map((game, i) => 
-            <div 
+            <td 
                 key={i} 
                 className={`${classes.cell} ${pending.includes(i) ? classes.pending : game ? classes.on : classes.off}`} 
                 onClick={toggleGame.bind(null, i)}/>)}
-        </div>)
+        </tr>)
 }

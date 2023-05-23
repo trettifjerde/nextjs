@@ -1,6 +1,4 @@
 .entry {
-    display: flex;
-    align-items: center;
 }
 
 .username, .cell {
@@ -15,6 +13,8 @@
 
 .username {
     min-width: 10rem;
+    position: sticky;
+    left: 0;
 }
 
 .cell {
@@ -48,4 +48,8 @@
 .isuser .username {
     background-color: var(--dark);
     color: white;
+}
+
+@media (max-width: 600px) {
+    .username {min-width: 6rem;}
 }

@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 50;
     display: flex;
     justify-content: space-between;
     background-color: transparent;
@@ -93,9 +93,12 @@
 
 @media (max-width: 850px) {
     .list li, .dark .list li, .list li.nav-btn, .dark .list li.nav-btn {
-        width: 4rem;
         height: 4rem;
         line-height: 4rem;
+    }
+
+    .list li.nav-btn, .dark .list li.nav-btn {
+        width: 4rem;
     }
 
     .list li.nav-btn {font-size: 2rem;}
@@ -121,5 +124,20 @@
     .dark.nav, .dark .menu {
         background-image: none;
         background-color: var(--dark);
+    }
+}
+
+@media (max-width: 400px) {
+    .list li, .dark .list li, .list li.nav-btn, .dark .list li.nav-btn {
+        height: 3rem;
+        line-height: 3rem;
+    }
+
+    .list li.nav-btn, .dark .list li.nav-btn {
+        width: 3rem;
+    }
+
+    .menu {
+        top: 3rem;
     }
 }

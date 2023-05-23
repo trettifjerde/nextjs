@@ -5,21 +5,26 @@ import UserMenu from './components/user-menu';
 import { useSession } from 'next-auth/react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
-function WindirHeader() {
+function WindirHeader({error}: {error: string}) {
     const {status} = useSession();
 
-    return (<header className={classes.header}>
-        <Logo clName={classes.logo} />
-        <SwitchTransition mode='out-in'>
-            <CSSTransition key={status} timeout={300} classNames='fade' >   
-                <div>
-                    {status === 'authenticated' && <UserMenu/>}
-                    {status === 'unauthenticated' && <SingInForm />}
-                </div>
-            </CSSTransition>
-
-        </SwitchTransition>
-
-    </header>)
+    if (error) {
+        return (<header className={classes.header}>
+            <div className={classes.error}>{error}</div>
+            <div>{error === '404' ? 'Страница не найдена' : 'Ошибка на сервере'}</div>
+        </header>)
+    }
+    else
+        return (<header className={classes.header}>
+            <Logo />
+            <SwitchTransition mode='out-in'>
+                <CSSTransition key={status} timeout={300} classNames='fade' >   
+                    <div>
+                        {status === 'authenticated' && <UserMenu/>}
+                        {status === 'unauthenticated' && <SingInForm />}
+                    </div>
+                </CSSTransition>
+            </SwitchTransition>
+        </header>)
 }
 export default WindirHeader

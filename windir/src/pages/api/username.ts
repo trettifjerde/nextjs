@@ -21,7 +21,7 @@ const handler : NextApiHandler = async(req, res) => {
             }
 
             try { 
-                const user = await client.db().collection('windir-users').findOne({username: session.user.username}) as WindirEntry;
+                const user = await client.db().collection('windir-users').findOne({username: username}) as WindirEntry;
 
                 if (!user) {
                     throw new Error('');
@@ -29,7 +29,7 @@ const handler : NextApiHandler = async(req, res) => {
 
                 if (req.method === 'POST') {
                     const data = req.body;
-                    const r = await client.db().collection('windir-users').updateOne({username: session.user.username}, {$set: {newUsername: data.username}});
+                    const r = await client.db().collection('windir-users').updateOne({username: username}, {$set: {newUsername: data.username}});
                     res.status(200).json('');
                 }
                 else {

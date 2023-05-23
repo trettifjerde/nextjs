@@ -1,5 +1,5 @@
-import classes from './logo.module.css';
-function Logo({clName}: {clName: string}) {
-    return <div className={`${classes.logo} ${clName}`}>windir</div>
+import classes from '../header.module.css';
+function Logo() {
+    return <div className={classes.logo}>windir</div>
 }
 export default Logo;

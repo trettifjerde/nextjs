@@ -1,10 +1,27 @@
+.about .image-cont {
+    margin-bottom: 6rem; 
+}
 .about .image-cont h1 {
-    position: static;
     color: var(--dark);
     text-shadow: none;
     font-size: 34px;
+    bottom: -4rem;
+    top: unset;
+    text-shadow: -1px 0 5px var(--light), 0 1px 5px var(--light), 1px 0 5px var(--light), 0 -1px 5px var(--light);;
 }
 
 .img-cont {
     height: 500px;
+    margin-block: 1rem;
+}
+
+.about em {
+    display: block;
+    text-align: end;
+}
+
+@media (max-width: 600px) {
+    .img-cont {
+        height: 300px;
+    }
 }

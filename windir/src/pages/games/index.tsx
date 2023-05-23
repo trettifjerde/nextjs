@@ -6,6 +6,7 @@ import { dbUrl } from "@/util/appKeys";
 import { useSession } from "next-auth/react";
 import UserGameEntry from "@/components/games/user-game-entry";
 import { useState } from "react";
+import classes from '@/components/layout/page/styles/games.module.css';
 
 export default function Games({players}: {players: {[key: string]: boolean[]}}) {
     const {data: session} = useSession();
@@ -13,9 +14,17 @@ export default function Games({players}: {players: {[key: string]: boolean[]}}) 
 
     return <>
         <div className="error-text center">{error}</div>
-        {Object.keys(players).length > 0 && Object.entries(players).map(([username, days]) => (session?.user?.username === username || session?.user?.username === 'admin') ?
-            <UserGameEntry key={username} username={username} info={days} setError={setError}/> :
-            <GameEntry key={username} username={username} games={days} />)}
+        {Object.keys(players).length > 0 && <div className={classes.cont}>
+            <table className={classes.table}>
+                <thead></thead>
+                <tbody>
+                {Object.entries(players).map(([username, days]) => (session?.user?.username === username || session?.user?.username === 'admin') ?
+                    <UserGameEntry key={username} username={username} info={days} setError={setError}/> :
+                    <GameEntry key={username} username={username} games={days} />)}
+                </tbody>
+            </table>
+        </div>}
+
         {Object.keys(players).length === 0 && <div className="center">Нет данных</div>}
     </>
 }
