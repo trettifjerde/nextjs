@@ -9,7 +9,18 @@
 
 .mods li .img-cont {
     flex-shrink: 1;
-    height: 300px;
+    height: 25vh;
     width: calc(50% - 4px);
     margin-block: 2rem;
+}
+
+@media (max-width: 450px) {
+
+    .mods ol li {
+        padding-left: 0;
+    }
+    .mods li .img-cont {
+        width: calc(100% - 4px);
+        height: 30vh;
+    }
 }

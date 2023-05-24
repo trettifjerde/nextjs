@@ -1,1 +1,35 @@
 .skills {}
+
+.skills ul li {
+    display: flex;
+    align-items: center;
+}
+
+.skills ul ul li {
+    display: list-item;
+}
+
+.li-text {
+    flex-grow: 1;
+}
+
+.li-imgs {
+
+}
+
+.img-cont {
+    width: 40vw;
+    height: 20vw;
+    margin: 1rem auto;
+}
+
+@media (max-width: 700px) {
+    .skills ul li {
+        display: block;
+    }
+
+    .img-cont {
+        width: 100%;
+        height: 20vh;
+    }
+}

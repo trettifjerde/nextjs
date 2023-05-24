@@ -11,7 +11,7 @@ function WindirHeader({error}: {error: string}) {
     if (error) {
         return (<header className={classes.header}>
             <div className={classes.error}>{error}</div>
-            <div>{error === '404' ? 'Страница не найдена' : 'Ошибка на сервере'}</div>
+            <div>{error === '404' ? 'Страница не найдена или находится в разработке' : 'Ошибка на сервере'}</div>
         </header>)
     }
     else

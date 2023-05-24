@@ -1,13 +1,13 @@
 import { FormEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import classes from './form.module.css';
 import { useSession } from 'next-auth/react';
-import { createPortal } from 'react-dom';
 import { fetchData } from '@/util/fetch';
+import Modal from '@/components/ui/modal';
 
 const zones = Intl.supportedValuesOf('timeZone');
 type ResStatus = {text: string, clName: 'pending' | 'error-text' | 'ok-text'};
 
-export default function UserEditForm({toggleEdit}: {toggleEdit: () => void}) {
+export default function UserEditForm({visible, toggleModal}: {visible: boolean, toggleModal: () => void}) {
 
     const {data: session, update} = useSession();
 
@@ -120,9 +120,7 @@ export default function UserEditForm({toggleEdit}: {toggleEdit: () => void}) {
         checkNameStatus();
     }, [setNameRes]);
 
-    return createPortal(<div className={classes.modal}>
-        <div className={`${classes.inner} slide-down`}>
-            <button type='button' className='btn' onClick={toggleEdit}>X</button>
+    return <Modal visible={visible} toggleModal={toggleModal} modalId='modal'>
             <form onSubmit={handleUsernameSubmit}>
                 <div className={classes.head}>
                     <div>Позывной</div>
@@ -157,7 +155,5 @@ export default function UserEditForm({toggleEdit}: {toggleEdit: () => void}) {
                     <button className='btn'>Сменить</button>
                 </div>
             </form>
-        </div>
-        <div className={classes['modal-shadow']} onClick={toggleEdit}/>
-    </div>, document.getElementById('modal')!);
+        </Modal>;
 }
