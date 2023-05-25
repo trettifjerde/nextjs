@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<{data: PageData, zones: stri
         const ru = new Intl.Locale('ru');
         return {
             props: {
-                data: {image: '', title: 'Заявка в отряд', styles: 'register'},
+                data: {image: '', title: 'Заявка в отряд', styles: ''},
                 zones: Intl.supportedValuesOf('timeZone')
             }
         }

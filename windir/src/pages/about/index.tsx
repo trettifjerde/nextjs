@@ -10,7 +10,5 @@ export default function About({data, content}: {data: PageData, content: string}
 
 export const getStaticProps: GetStaticProps<{data: PageData, content: string}> = async() => {
     const {data, content} = getPage('about', true);
-  return {
-    props: {data, content}
-  }
+    return {props: {data, content}}
 }

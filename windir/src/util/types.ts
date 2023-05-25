@@ -41,3 +41,24 @@ export type WindirUser = {
 }
 
 export type UsernameChangeEntry = {id: string, oldN: string, newN: string}
+
+export type Game = {
+    id: string,
+    day: number,
+    time: string,
+    image: string,
+    players: string[]
+}
+
+export type GameEntry = {
+    _id: ObjectId,
+    day: number,
+    time: string,
+    image: string,
+    players?: string[]
+}
+
+export type ShortPlayerInfo = {
+    username: string,
+    id: string
+}

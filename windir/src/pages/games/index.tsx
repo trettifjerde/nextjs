@@ -1,61 +1,37 @@
-import GameEntry from "@/components/games/game-entry";
 import { GetServerSideProps } from "next";
-import { PageData, PlayerGames } from "@/util/types";
-import { MongoClient } from "mongodb";
+import { Game, GameEntry, ShortPlayerInfo, WindirUser } from "@/util/types";
+import { FindOptions, MongoClient } from "mongodb";
 import { dbUrl } from "@/util/appKeys";
-import { useSession } from "next-auth/react";
-import UserGameEntry from "@/components/games/user-game-entry";
-import { useState } from "react";
-import classes from '@/components/layout/page/styles/games.module.css';
+import GamesTable from "@/components/games/games-table";
+import { castToGame } from "@/util/admin";
 
-export default function Games({players}: {players: {[key: string]: boolean[]}}) {
-    const {data: session} = useSession();
-    const [error, setError] = useState('');
+export default function GamesPage({ games, players }: { games: Game[], players: WindirUser[] }) {
+    if (Object.keys(games).length > 0)
+        return <GamesTable games={games} players={players} />
 
-    return <>
-        <div className="error-text center">{error}</div>
-        {Object.keys(players).length > 0 && <div className={classes.cont}>
-            <table className={classes.table}>
-                <thead></thead>
-                <tbody>
-                {Object.entries(players).map(([username, days]) => (session?.user?.username === username || session?.user?.username === 'admin') ?
-                    <UserGameEntry key={username} username={username} info={days} setError={setError}/> :
-                    <GameEntry key={username} username={username} games={days} />)}
-                </tbody>
-            </table>
-        </div>}
-
-        {Object.keys(players).length === 0 && <div className="center">Нет данных</div>}
-    </>
+    else
+        return <div className="center">Нет данных</div>
 }
 
-export const getServerSideProps: GetServerSideProps<{players: PlayerGames, data: PageData}> = async(context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const props = {
-        data: {image: '', title: 'Игры', styles: 'games'},
-        players: {} as PlayerGames
+        data: { image: '', title: 'Игры', styles: '' },
+        games: [] as Game[],
+        players: [] as ShortPlayerInfo[]
     };
-    
-    let client: MongoClient;
+
     try {
-        client = await MongoClient.connect(dbUrl);
+        const client = await MongoClient.connect(dbUrl);
+        const dbGames = await client.db().collection('windir-games').find().toArray() as GameEntry[];
+        const dbUsers = await client.db().collection('windir-users').find({isActive: true}, {username: 1} as FindOptions).toArray();
+
+        props.games = dbGames.map(game => castToGame(game));
+        props.players = dbUsers.map(user => ({username: user.username as string, id: user._id.toString()}));
     }
     catch (error) {
         console.log(error);
-        return {props};
     }
 
-    try {
-        const games = await client.db().collection('windir-games').find().toArray();
-        console.log(games);
-        props.players = games.reduce((acc, v) => {
-            acc[v.username] = v.games;
-            return acc;
-        }, {} as PlayerGames)
-    }
-    catch(error) {
-        console.log(error);
-    }
-    client.close();
-    return {props};    
+    return { props };
 }

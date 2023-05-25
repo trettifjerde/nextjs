@@ -30,8 +30,8 @@ function SingInForm() {
     return (<div className={classes.div}>
             <form onSubmit={handleSubmit}>
                 <p className={classes['error-text']}>{error}</p>
-                <input ref={nameRef} className={classes.input} type="text" placeholder='Логин'/>
-                <input ref={passRef} className={classes.input} type='password' placeholder='Пароль' />
+                <input ref={nameRef} className={`input ${classes.input}`} type="text" placeholder='Логин'/>
+                <input ref={passRef} className={`input ${classes.input}`} type='password' placeholder='Пароль' />
                 <button className="btn">Войти</button>
             </form>
             {loading && <div className={classes.shadow}>

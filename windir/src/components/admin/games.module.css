@@ -1,0 +1,35 @@
+.game, .info, .form {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    min-height: 5rem;
+}
+
+.info, .control {
+    flex-grow: 1;
+}
+
+.info  {justify-content: flex-end;}
+
+.form {justify-content: space-between;}
+
+.form-cont { flex-grow: 1;}
+
+.input {width: 100%;}
+
+.add {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.control {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s, visibility .3s;
+    text-align: end;
+}
+
+.game:hover .control {
+    visibility: visible;
+    opacity: 1;
+}

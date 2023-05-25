@@ -1,7 +1,14 @@
-.entry {
+.cont {
+    width: 100%;
+    overflow: auto;
+    position: relative;
 }
 
-.username, .cell {
+.cont .table {
+    margin: auto;
+}
+
+.table th, .table td {
     height: 2.5rem;
     line-height: 2.5rem;
     margin: 0.1rem;
@@ -9,6 +16,10 @@
     border-radius: 5px;
     border: 1px solid var(--dark);
     transition: background-color .3s;
+}
+
+th.reload {
+    padding: 2rem 3rem;
 }
 
 .username {

@@ -52,6 +52,6 @@ export default function UsersTable({users, clickHandler, getText}: {
                 </tr>)}
             </tbody>
         </table>}
-        {users.length === 0 && <div className='center'>Нет заявок</div>}
+        {users.length === 0 && <div className='center'>Пусто</div>}
     </>)
 }

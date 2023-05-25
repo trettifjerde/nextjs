@@ -10,8 +10,8 @@ export default function PageHeader({data}: {data: PageData}) {
     const header = <h1>{title}</h1>;
 
     return (<>
-        {image && <div className={`${headerClasses['image-cont']} ${pageClasses[styles]['image-cont'] ? pageClasses[styles]['image-cont'] : ''}`}>
-            <Image src={image} alt="Заглавное изображение" fill />
+        {image && <div className={`${headerClasses['image-cont']} ${styles && pageClasses[styles]['image-cont'] ? pageClasses[styles]['image-cont'] : ''}`}>
+            <Image src={image} alt="Заглавное изображение" fill sizes={sizes}/>
             {header}
         </div>}
         

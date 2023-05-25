@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./auth/[...nextauth]";
+import { authOptions } from "../auth/[...nextauth]";
 import { MongoClient, ObjectId } from "mongodb";
 import { dbUrl } from "@/util/appKeys";
 import { WindirEntry } from "@/util/types";

@@ -78,6 +78,27 @@ button.btn:disabled, button.btn:disabled:hover {
   border-color: gray !important;
 }
 
+.input, .textarea {
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    background-color: transparent;
+    margin: 0.5rem auto;
+    outline: none;
+    padding: 0.2rem 0.5rem;
+    transition: border-color .2s, background-color .2s;
+}
+
+.input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+.textarea:disabled {
+  background-color: #f7f7f7;
+  border-color: transparent;
+  resize: none;
+}
+
 .center {
   text-align: center;
 }

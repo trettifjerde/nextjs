@@ -126,7 +126,7 @@ export default function UserEditForm({visible, toggleModal}: {visible: boolean, 
                     <div>Позывной</div>
                     <p className={classes[nameRes.clName]}>{nameRes.text}</p>
                 </div>
-                <input type="text" ref={nameRef} className={classes.input} defaultValue={session?.user?.username} />
+                <input type="text" ref={nameRef} className={`input ${classes.input}`} defaultValue={session?.user?.username} />
                 <div className='center'>
                     <button className="btn">Сменить</button>
                 </div>
@@ -136,9 +136,9 @@ export default function UserEditForm({visible, toggleModal}: {visible: boolean, 
                     <div>Пароль</div>
                     <p className={classes[passRes.clName]}>{passRes.text}</p>
                 </div>
-                <input ref={oldPwd} className={classes.input} type="password" placeholder="Текущий пароль" />
-                <input ref={newPwd} className={classes.input} type="password" placeholder="Новый пароль" />
-                <input ref={newPwd2} className={classes.input} type="password" placeholder="Повторите новый пароль" />
+                <input ref={oldPwd} className={`input ${classes.input}`} type="password" placeholder="Текущий пароль" />
+                <input ref={newPwd} className={`input ${classes.input}`} type="password" placeholder="Новый пароль" />
+                <input ref={newPwd2} className={`input ${classes.input}`} type="password" placeholder="Повторите новый пароль" />
                 <div className='center'>
                     <button className='btn'>Сменить</button>
                 </div>
@@ -148,7 +148,7 @@ export default function UserEditForm({visible, toggleModal}: {visible: boolean, 
                     <div>Часовой пояс</div>
                     <p className={classes[zoneRes.clName]}>{zoneRes.text}</p>
                 </div>
-                <select ref={zoneRef} className={classes.input} defaultValue={session?.user?.utc}>
+                <select ref={zoneRef} className={`input ${classes.input}`} defaultValue={session?.user?.utc}>
                     {zones.map(zone => <option key={zone}>{zone}</option>)}
                 </select>
                 <div className='center'>

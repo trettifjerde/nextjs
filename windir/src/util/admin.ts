@@ -1,4 +1,4 @@
-import { WindirEntry, WindirUser } from "./types";
+import { Game, GameEntry, WindirEntry, WindirUser } from "./types";
 
 export function castToUser(entry: WindirEntry) {
     const user : WindirUser = {
@@ -19,4 +19,14 @@ export function castToUser(entry: WindirEntry) {
     if (entry.newUsername) user.newUsername = entry.newUsername;
     
     return user;
+}
+
+export function castToGame(entry: GameEntry) {
+    return {
+        id: entry._id.toString(),
+        day: entry.day,
+        time: entry.time,
+        players: entry.players || [],
+        image: entry.image
+    } as Game
 }

@@ -4,25 +4,15 @@
     margin-inline: auto;
 }
 
-.input {
+input.input {
     width: 100%;
-    border-radius: 5px;
     border: 1px solid white;
-    background-color: transparent;
     color: white;
     display: block;
-    margin: 0.5rem auto;
-    outline: none;
-    padding: 0.2rem 0.5rem;
-    transition: background-color .2s;
 }
 
-.input option {
+input.input option {
     color: black;
-}
-
-.input:focus {
-    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .error-text, .ok-text, .pending {
@@ -47,77 +37,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.modal {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-}
-
-.inner {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin-inline: auto;
-    background-image: url('/images/bg.jpg');
-    border-radius: 5px;
-    padding: 2rem;
-    text-align: end;
-    box-shadow: 0 0 6px 3px var(--dark);
-    z-index: 2;
-}
-.modal-shadow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: #6464648c;
-    z-index: 1;
-    cursor: pointer;
-}
-
-.inner form {
-    text-align: start;
-}
-
-.inner form button {
-    margin-inline: auto;
-}
-
-.head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.head p { text-align: end;}
-
-@media (max-width: 600px) {
-    .head {
-        flex-wrap: wrap;
-    }
-    .head p {
-        text-align: start;
-    }
-
-    .modal {
-        z-index: 100;
-    }
-
-    .inner {
-        padding: 1rem;
-        height: 100%;
-        overflow: auto;
-    }
-    .modal-shadow {display: none;}
 }

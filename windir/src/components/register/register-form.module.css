@@ -4,6 +4,7 @@
 
 .form {
     max-width: 1000px;
+    margin: auto;
 }
 
 .form label {
@@ -32,24 +33,14 @@
 }
 
 .input, .textarea {
-    border-radius: 5px;
     border: 1px solid var(--dark);
-    background-color: transparent;
     color: var(--dark);
-    outline: none;
-    padding: 0.2rem 0.5rem;
-    transition: border-color .3s, background-color .3s;
+    width: 100%;
 }
 
 .textarea {
     min-width: 100%;
     min-height: 7rem;
-}
-
-.textarea:disabled {
-    background-color: #f7f7f7;
-    border-color: transparent;
-    resize: none;
 }
 
 .btn {
@@ -113,18 +104,6 @@
 
 .invalid {
     border-color: var(--red);
-}
-
-.loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 @media (max-width: 600px) {

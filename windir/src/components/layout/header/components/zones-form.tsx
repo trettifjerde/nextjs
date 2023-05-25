@@ -20,7 +20,7 @@ export default function ZonesForm({toggleEdit}: {toggleEdit: () => void}) {
         <div className={classes.div}>
             <form onSubmit={handleSubmit}>
                 <p className={classes.error}>{error}</p>
-                <select ref={selectRef} className={classes.input} defaultValue={session?.user?.utc}>
+                <select ref={selectRef} className={`input ${classes.input}`} defaultValue={session?.user?.utc}>
                     {Intl.supportedValuesOf('timeZone').map(zone => <option key={zone}>{zone}</option>)}
                 </select>
                 <div>

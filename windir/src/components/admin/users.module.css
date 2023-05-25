@@ -23,6 +23,8 @@
     align-items: center;
 }
 
+
+
 @media (max-width: 600px) {
     .table th, .table td {
         border: 1px solid transparent;

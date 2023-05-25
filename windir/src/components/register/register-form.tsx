@@ -22,7 +22,7 @@ const pass2Ref = useRef<HTMLInputElement>(null);
 const formRef = useRef<HTMLFormElement>(null);
 const messageRef = useRef<HTMLParagraphElement>(null);
 
-const getClassName = useCallback((error: string | undefined) => (`${classes.input} ${error ? classes.invalid : ''}`), []);
+const getClassName = useCallback((error: string | undefined) => (`input ${classes.input} ${error ? classes.invalid : ''}`), []);
 
 const handleHasTelegram = useCallback(() => setHasTelegram(prev => !prev), [setHasTelegram]);
 
@@ -142,7 +142,7 @@ return <>
 
             <div className={classes.control}>
                 <label htmlFor="UTC">Часовой пояс</label>
-                <select className={classes.input} id="utc" name="utc">
+                <select className={`input ${classes.input}`} id="utc" name="utc">
                     {zones.map(zone => <option key={zone}>{zone}</option>)}
                 </select>
             </div>
@@ -167,7 +167,7 @@ return <>
 
             <div className={classes.control}>
                 <label htmlFor="teams">Отряды, в которых вы состояли</label>
-                <textarea className={classes.textarea} id="teams" name="teams" maxLength={500} />
+                <textarea className={`textarea ${classes.textarea}`} id="teams" name="teams" maxLength={500} />
             </div>
 
             <div className={classes.checkscontrol}>
@@ -184,7 +184,7 @@ return <>
 
             {extraProjectVisible && <div className={classes.control}>
                 <label htmlFor="other-proj">Другие проекты</label>
-                <textarea id="other-proj" className={classes.textarea} name="other" maxLength={500}/>
+                <textarea id="other-proj" className={`textarea ${classes.textarea}`} name="other" maxLength={500}/>
             </div>}
 
 
@@ -193,9 +193,7 @@ return <>
             <p className="center sm">Нажимая "Отправить", вы подтверждаете, что ознакомились с</p>
             <p className="center sm"><Link href="/about">информацией об отряде и его правилами</Link></p>
         </form>
-        {loading && <div className={classes.loading}>
-            <LoadingSpinner/>
-        </div>}
+        {loading && <LoadingSpinner/>}
     </div>}
     {success && <div className='center'>Заявка в отряд успешно отправлена. Командир отряда скоро свяжется с вами.</div>}
 </>

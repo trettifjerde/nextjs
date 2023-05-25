@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./auth/[...nextauth]";
+import { authOptions } from "../auth/[...nextauth]";
 import { MongoClient } from "mongodb";
 import { dbUrl } from "@/util/appKeys";
 
@@ -22,17 +22,6 @@ const handler: NextApiHandler = async(req, res) => {
 
             try {
                 const r = await client.db().collection('windir-users').updateOne({username: data.username}, {$set: {isActive: data.isActive}});
-
-                if (data.isActive) {
-                    const setGamesR = await client.db().collection('windir-games').insertOne({
-                        username: data.username,
-                        games: [false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-                    });
-                }
-                else {
-                    const removeGamesR = await client.db().collection('windir-games').deleteOne({username: data.username})
-                }
-
                 res.status(200).json('');
                 client.close();
                 return;

@@ -1,6 +1,3 @@
 main.index {
-    height: 0;
-    min-height: unset;
-    margin: 0;
-    padding: 0;
+    display: none;
 }
