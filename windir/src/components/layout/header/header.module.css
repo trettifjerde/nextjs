@@ -13,14 +13,6 @@
     padding-top: 20vh;
 }
 
-.logo {
-    font-family: logo-font;
-}
-
-.error {
-    font-family: error-code;
-}
-
 @media (max-width: 850px) {
     .header {
         background-attachment: fixed;

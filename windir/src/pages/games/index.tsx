@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const dbGames = await client.db().collection('windir-games').find().toArray() as GameEntry[];
         const dbUsers = await client.db().collection('windir-users').find({isActive: true}, {username: 1} as FindOptions).toArray();
 
-        props.games = dbGames.map(game => castToGame(game));
+        props.games = dbGames.map(game => castToGame(game)).sort();
         props.players = dbUsers.map(user => ({username: user.username as string, id: user._id.toString()}));
     }
     catch (error) {

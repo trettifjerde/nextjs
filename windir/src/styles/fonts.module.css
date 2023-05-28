@@ -1,0 +1,12 @@
+.oswald, .oswald input, .oswald button, .oswald select, .oswald textarea {
+    font-family: var(--font-oswald);
+    font-size: 20px;
+}
+
+.norse {
+    font-family: var(--font-norse);
+}
+
+.runes {
+    font-family: var(--font-runes);
+}

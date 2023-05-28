@@ -22,11 +22,6 @@ a {
   text-decoration: none;
 }
 
-button, input, body, textarea, select {
-  font-family: oswald;
-  font-size: 20px;
-}
-
 h1 {
   text-align: center;
   margin-block: 1rem;
@@ -253,22 +248,4 @@ button.btn:disabled, button.btn:disabled:hover {
   100% {
       opacity: 1;
   }
-}
-
-@font-face
-{
-    font-family: oswald;
-    src: url("/fonts/Oswald-Light.ttf");
-}
-
-@font-face
-{
-    font-family: logo-font;
-    src: url("/fonts/CvltRvneDemoBold-9Rp7.ttf");
-}
-
-@font-face
-{
-    font-family: error-code;
-    src: url("/fonts/Norse.otf");
 }

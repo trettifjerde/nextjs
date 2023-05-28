@@ -6,6 +6,7 @@
     text-shadow: none;
     font-size: 34px;
     bottom: -4rem;
+    height: unset;
     top: unset;
     text-shadow: -1px 0 5px var(--light), 0 1px 5px var(--light), 1px 0 5px var(--light), 0 -1px 5px var(--light);;
 }
@@ -13,6 +14,11 @@
 .img-cont {
     height: 500px;
     margin-block: 1rem;
+    cursor: default !important;
+}
+
+.img-cont:hover {
+    background-color: transparent !important;
 }
 
 .about em {

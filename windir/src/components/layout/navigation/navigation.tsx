@@ -3,6 +3,7 @@ import {CSSTransition} from 'react-transition-group';
 import Link from 'next/link';
 import classes from './navigation.module.css';
 import { useSession } from 'next-auth/react';
+import fonts from '@/styles/fonts.module.css';
 
 function Navigation() {
 
@@ -46,7 +47,7 @@ function Navigation() {
     }, [dark, setTheme]);
 
     return (
-        <nav className={`${classes.nav} ${dark ? classes.dark : ''} ${menuOpen ? classes.open : ''}`}>
+        <nav className={`${fonts.oswald} ${classes.nav} ${dark ? classes.dark : ''} ${menuOpen ? classes.open : ''}`}>
             <ul className={`${classes.list} ${classes.burger}`}>
                 <li className={classes['nav-btn']} onClick={toggleMenu}>{menuOpen ? 'x': 'iii'}</li>
             </ul>

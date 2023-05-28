@@ -24,10 +24,10 @@
     padding-left: 1rem;
     margin-block: 1rem;
 }
-  
+
 .content ul li::marker {
     content: 'o';
-    font-family: logo-font;
+    font-family: var(--font-runes);
 }
 
 .content a {
