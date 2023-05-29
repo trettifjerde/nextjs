@@ -2,11 +2,12 @@ import { dbUrl } from "@/util/appKeys";
 import { MongoClient, ObjectId } from "mongodb";
 import { NextApiHandler } from "next";
 import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]";
 
 const handler : NextApiHandler = async (req, res) => {
     
     if (req.method === 'POST') {
-        const session = await getServerSession();
+        const session = await getServerSession(req, res, authOptions);
 
         if (session?.user?.username !== 'admin') {
             res.status(401).json({error: 'Доступ запрещен'});
@@ -14,12 +15,19 @@ const handler : NextApiHandler = async (req, res) => {
         }
 
         try {
-            const {id, ...data} = req.body;
             const client = await MongoClient.connect(dbUrl);
-            const r = await client.db().collection('windir-games').updateOne({id: new ObjectId(id)}, {$set: data});
-            client.close();
-            res.status(200).json('');
-            return;
+            
+            try {
+                const {id, ...data} = req.body;
+                const r = await client.db().collection('windir-games').updateOne({_id: new ObjectId(id)}, {$set: data});
+                client.close();
+                res.status(200).json('');
+                return;
+            }
+            catch(error) {
+                client.close();
+                throw error;
+            }
         }
         catch(error) {
             console.log(error);

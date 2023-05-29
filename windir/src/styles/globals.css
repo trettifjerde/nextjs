@@ -140,10 +140,6 @@ button.btn:disabled, button.btn:disabled:hover {
   font-weight: 600;
 }
 
-.slide {
-  visibility: hidden;
-}
-
 .slide-enter-done {
   visibility: visible;
   opacity: 1;
@@ -194,6 +190,13 @@ button.btn:disabled, button.btn:disabled:hover {
   display: block !important;
   animation: slide-y .3s ease-in-out reverse forwards;
 }
+
+.form-enter {animation: swipe-left-enter .25s ease-in-out forwards;}
+.form-exit {animation: swipe-left-enter .25s ease-in-out reverse forwards;}
+.entry-enter {animation: swipe-left-exit .25s ease-in-out reverse forwards;}
+.entry-exit {animation: swipe-left-exit .25s ease-in-out forwards;}
+.form-enter-done, .entry-enter-done {opacity: 1;}
+.form-exit-done, .entry-exit-done {opacity: 0;}
 
 @media (max-width: 850px) {
   .slide-enter, .slide-exit {
@@ -248,4 +251,14 @@ button.btn:disabled, button.btn:disabled:hover {
   100% {
       opacity: 1;
   }
+}
+
+@keyframes swipe-left-exit {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 0;}
+}
+
+@keyframes swipe-left-enter {
+  0% {transform: translateX(100%); opacity: 0;}
+  100% { transform: translateX(0); opacity: 1;}
 }

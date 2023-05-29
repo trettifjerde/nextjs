@@ -1,5 +1,5 @@
 
-import { Game, UsernameChangeEntry, WindirUser } from "@/util/types";
+import { AdminPanelGame, UsernameChangeEntry, WindirUser } from "@/util/types";
 import { MouseEvent, useCallback, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -10,7 +10,7 @@ import UsernamesTable from "@/components/admin/usernames";
 import GamesTable from "@/components/admin/games";
 
 export default function AdminPanel({users : u, changeRequests: cR, games}: {
-    users: WindirUser[], changeRequests: UsernameChangeEntry[], games: Game[]
+    users: WindirUser[], changeRequests: UsernameChangeEntry[], games: AdminPanelGame[]
 }) {
 
     const [users, setUsers] = useState(u.filter(user => !user.isNew));

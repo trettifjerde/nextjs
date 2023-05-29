@@ -42,14 +42,17 @@ export type WindirUser = {
 
 export type UsernameChangeEntry = {id: string, oldN: string, newN: string}
 
-export type Game = {
+
+export interface AdminPanelGame {
     id: string,
     day: number,
     time: string,
     image: string,
-    players: string[]
 }
 
+export interface Game extends AdminPanelGame {
+    players: string[]
+}
 export type GameEntry = {
     _id: ObjectId,
     day: number,

@@ -10,7 +10,8 @@
     cursor: pointer;
     border-radius: 5px;
     padding: 1rem;
-    transition: background-color .3s ease-in-out;
+    background-color: var(--light);
+    transition: background-color .3s ease-in-out, color .3s ease-in-out;
 }
 
 .header h2 { margin: 0;}
@@ -25,8 +26,19 @@
     transform: rotate(0deg);
 }
 
+.open .header {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
 .header:hover {
-    background-color: rgba(100, 100, 100, 0.205);
+    background-color: rgba(214, 214, 214);
+    color: var(--dark);
+}
+
+.open .header:hover {
+    background-color: rgba(94, 94, 94);
+    color: var(--light);
 }
 
 .header:hover span { transform: rotate(180deg) scale(1.5);}

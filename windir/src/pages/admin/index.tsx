@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async({req, res}) => {
 
                 const users = sortUsers(dbUsers.map(user => castToUser(user)));
                 const changeRequests = users.filter(user => user.newUsername).map(user => ({id: user.id, oldN: user.username, newN: user.newUsername}));
-                const games = sortGames(dbGames.map(game => castToGame(game)));
+                const games = sortGames(dbGames.map(game => castToGame(game, false)));
 
                 return {
                     props: {

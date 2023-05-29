@@ -42,7 +42,7 @@ export function makeUserGames(user: ShortPlayerInfo, games: Game[]) {
     return games.map(game => ({gameId: game.id, on: game.players.includes(user.id)}))
 }
 
-export function sortGames(games: Game[]) {
+export function sortGames<T extends {day: number, time: string}>(games: T[]) {
     const sortedGames = [...games];
     sortedGames.sort((a, b) => {
         if (a.day === b.day) return a.time > b.time ? 1 : -1

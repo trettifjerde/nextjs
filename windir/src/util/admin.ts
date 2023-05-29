@@ -1,4 +1,4 @@
-import { Game, GameEntry, WindirEntry, WindirUser } from "./types";
+import { AdminPanelGame, Game, GameEntry, WindirEntry, WindirUser } from "./types";
 
 export function castToUser(entry: WindirEntry) {
     const user : WindirUser = {
@@ -21,12 +21,15 @@ export function castToUser(entry: WindirEntry) {
     return user;
 }
 
-export function castToGame(entry: GameEntry) {
-    return {
+export function castToGame(entry: GameEntry, withPlayers=true) {
+    const game : any = {
         id: entry._id.toString(),
         day: entry.day,
         time: entry.time,
-        players: entry.players || [],
         image: entry.image
-    } as Game
+    };
+    if (withPlayers) {
+        game['players'] = entry.players || [];
+    }
+    return withPlayers ? game as Game : game as AdminPanelGame;
 }

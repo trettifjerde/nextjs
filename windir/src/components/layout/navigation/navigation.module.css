@@ -54,6 +54,8 @@
     transform: rotate(90deg);
 }
 
+.menu { visibility: hidden;}
+
 .btns {
     visibility: hidden;
     opacity: 0;

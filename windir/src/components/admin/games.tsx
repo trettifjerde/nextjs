@@ -1,4 +1,4 @@
-import { Game } from "@/util/types";
+import { AdminPanelGame, Game } from "@/util/types";
 import classes from './games.module.css';
 import GameDateEntry from "./game-date-entry";
 import { MouseEvent, useCallback, useState } from "react";
@@ -6,8 +6,9 @@ import GameDateEntryForm from "./game-date-entry-edit";
 import LoadingSpinner from "../ui/spinner";
 import { fetchData } from "@/util/fetch";
 import { sortGames } from "@/util/games";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 
-export default function GamesTable({games: g}: {games: Game[]}) {
+export default function GamesTable({games: g}: {games: AdminPanelGame[]}) {
 
     const [games, setGames] = useState(g);
     const [message, setMesssage] = useState('');
@@ -16,7 +17,7 @@ export default function GamesTable({games: g}: {games: Game[]}) {
 
     const toggleMode = useCallback(() => setEditMode(prev => !prev), [setEditMode]);
 
-    const addGame = useCallback(async (btn: HTMLButtonElement, data: Game) => {
+    const addGame = useCallback(async (btn: HTMLButtonElement, data: AdminPanelGame) => {
         btn.disabled = true;
         setLoading(true);
 
@@ -56,19 +57,25 @@ export default function GamesTable({games: g}: {games: Game[]}) {
         btn.disabled = false;
     }, [setGames, setLoading, setMesssage]);
 
-    return <>
+    return <div className={classes.cont}>
             <p className="center">{message}</p>
 
             {games.length === 0 && <div className="center">Игры не анонсированы</div>}
 
             {games.length > 0 && games.map(game => <GameDateEntry game={game} key={game.id} updateGame={updateGame} deleteGame={deleteGame} />)}
 
-            {editMode && <GameDateEntryForm toggleForm={toggleMode} handleSubmit={addGame} />}
+            <SwitchTransition mode="out-in">
+                <CSSTransition key={editMode.toString()} timeout={250} classNames={editMode ? 'form' : 'entry'}>
+                    <>
+                        {editMode && <GameDateEntryForm toggleForm={toggleMode} handleSubmit={addGame} />}
+                        {! editMode && <div className={classes.add}>
+                            <button type="button" className="btn btn-dark" onClick={toggleMode}>Добавить игру</button>
+                        </div>}
+                    </>
+                </CSSTransition>
+            </SwitchTransition>
 
-            {! editMode && <div className={classes.add}>
-                <button type="button" className="btn btn-dark" onClick={toggleMode}>Добавить игру</button>
-            </div>}
 
         {loading && <LoadingSpinner />}
-    </>
+    </div>
 }

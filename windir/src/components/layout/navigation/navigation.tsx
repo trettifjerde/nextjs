@@ -52,7 +52,7 @@ function Navigation() {
                 <li className={classes['nav-btn']} onClick={toggleMenu}>{menuOpen ? 'x': 'iii'}</li>
             </ul>
             <CSSTransition in={menuOpen} timeout={300} classNames='slide'>
-                <ul className={`${classes.list} ${classes.menu} slide`}>
+                <ul className={`${classes.list} ${classes.menu}`}>
                     <Link scroll={false} href="/games"><li>Игры</li></Link>
                     <Link scroll={false} href="/articles/mods"><li>Настройка модов</li></Link>
                     <Link scroll={false} href="/articles/skills"><li>Программа-минимум</li></Link>

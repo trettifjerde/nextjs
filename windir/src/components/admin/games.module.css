@@ -1,6 +1,25 @@
-.game, .info, .form {
+.cont, .entry {
+    overflow-x: hidden;
+}
+
+.entry {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+}
+
+.game {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.info, .form, .time-cont {
     display: flex;
     align-items: center;
+}
+
+.game, .info, .form {
     gap: 3rem;
     min-height: 5rem;
 }
@@ -13,13 +32,18 @@
 
 .form {justify-content: space-between;}
 
-.form-cont { flex-grow: 1;}
+.form-cont, .time-cont { flex-grow: 1;}
+
+.time-cont select {
+    flex-grow: 1;
+}
 
 .input {width: 100%;}
 
 .add {
     text-align: right;
-    margin-top: 1rem;
+    line-height: 5rem;
+    height: 5rem;
 }
 
 .control {
