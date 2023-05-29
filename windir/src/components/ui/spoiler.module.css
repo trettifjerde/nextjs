@@ -16,7 +16,7 @@
 .header h2 { margin: 0;}
 
 .header span { 
-    font-family: logo-font;
+    font-family: var(--font-runes);
     transition: transform .3s;
     transform: rotate(180deg) scale(1);
 }

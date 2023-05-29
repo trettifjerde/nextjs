@@ -6,6 +6,7 @@ import { dbUrl } from "@/util/appKeys";
 import { Game, GameEntry, PageData, UsernameChangeEntry, WindirEntry, WindirUser } from "@/util/types";
 import { castToGame, castToUser } from "@/util/admin";
 import AdminPanel from "@/components/admin/admin-panel";
+import { sortGames, sortUsers } from "@/util/games";
 
 export default function Admin(props: {users: WindirUser[], changeRequests: UsernameChangeEntry[], games: Game[]}) {
     return <AdminPanel {...props} />
@@ -22,18 +23,20 @@ export const getServerSideProps: GetServerSideProps = async({req, res}) => {
             try {
 
                 const dbUsers = await client.db().collection<WindirEntry>('windir-users').find().toArray();
-                const games = await client.db().collection('windir-games')
-                    .find({}, {time: 1, day: 1, image: 1} as FindOptions).toArray() as GameEntry[];
+                const dbGames = await client.db().collection<GameEntry>('windir-games')
+                    .find({}, {time: 1, day: 1, image: 1} as FindOptions)
+                    .toArray();
                 client.close();
 
-                const users = dbUsers.map(user => castToUser(user));
+                const users = sortUsers(dbUsers.map(user => castToUser(user)));
                 const changeRequests = users.filter(user => user.newUsername).map(user => ({id: user.id, oldN: user.username, newN: user.newUsername}));
+                const games = sortGames(dbGames.map(game => castToGame(game)));
 
                 return {
                     props: {
                         users,
                         changeRequests,
-                        games: games.map(game => castToGame(game)),
+                        games,
                         data: {image: '', styles: '', title: 'Панель управления'} as PageData
                     }
                 }

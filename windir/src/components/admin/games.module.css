@@ -18,18 +18,10 @@
 .input {width: 100%;}
 
 .add {
-    text-align: center;
-    margin-top: 4rem;
+    text-align: right;
+    margin-top: 1rem;
 }
 
 .control {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity .3s, visibility .3s;
     text-align: end;
-}
-
-.game:hover .control {
-    visibility: visible;
-    opacity: 1;
 }

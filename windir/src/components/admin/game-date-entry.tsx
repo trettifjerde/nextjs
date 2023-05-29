@@ -1,7 +1,7 @@
 import { Game } from "@/util/types";
 import classes from './games.module.css';
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { MouseEvent, useCallback, useState } from "react";
 import { fetchData } from "@/util/fetch";
 import GameDateEntryForm from "./game-date-entry-edit";
 import { getLongDay } from "@/util/games";
@@ -9,7 +9,7 @@ import { getLongDay } from "@/util/games";
 export default function GameDateEntry({game, updateGame, deleteGame}: {
     game: Game, 
     updateGame: (id: string) => void,
-    deleteGame: (id: string) => void
+    deleteGame: (e: MouseEvent, id: string) => void
 }) {
     const [editMode, setEditMode] = useState(false);
     const [message, setMessage] = useState('');
@@ -32,7 +32,7 @@ export default function GameDateEntry({game, updateGame, deleteGame}: {
         btn.disabled = false;
     }, [setLoading, setMessage]);
 
-    const handleDelete = useCallback(() => deleteGame(game.id), [game, deleteGame]);
+    const handleDelete = useCallback((e: MouseEvent) => deleteGame(e, game.id), [game, deleteGame]);
 
     return <>
         <p className="sm">{message}</p>
