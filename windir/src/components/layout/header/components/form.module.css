@@ -38,3 +38,5 @@ input.input option {
     align-items: center;
     justify-content: center;
 }
+
+.invis {display: none !important;}

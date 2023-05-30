@@ -3,7 +3,7 @@ import { signIn } from 'next-auth/react';
 import classes from './form.module.css';
 import MiniLoadingSpinner from '@/components/ui/mini-spinner';
 
-function SingInForm() {
+function SingInForm({invis}: {invis: boolean}) {
     const nameRef = useRef<HTMLInputElement>(null);
     const passRef = useRef<HTMLInputElement>(null);
 
@@ -27,7 +27,7 @@ function SingInForm() {
         }
     }, [nameRef, passRef]);
 
-    return (<div className={classes.div}>
+    return (<div className={`${invis ? classes.invis : ''} ${classes.div}`}>
             <form onSubmit={handleSubmit}>
                 <p className={classes['error-text']}>{error}</p>
                 <input ref={nameRef} className={`input ${classes.input}`} type="text" placeholder='Логин'/>
