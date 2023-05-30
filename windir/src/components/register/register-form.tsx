@@ -80,7 +80,7 @@ const submitHandler: FormEventHandler = useCallback(async(e) => {
 
 const formMessageContent = useCallback(() => {
     const clName = (error || Object.keys(errors).length > 0) ? 'error-text' : 'remark'; 
-    return <p ref={messageRef} className={`center ${clName}`}>{
+    return <p ref={messageRef} className={`${classes.error} ${clName}`}>{
         Object.keys(errors).length !== 0 ? 'Не все поля заполнены верно' :
         error ? error :
         'Обязательные поля отмечены жирным'}</p>

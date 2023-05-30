@@ -2,6 +2,11 @@
     position: relative;
 }
 
+.error {
+    text-align: center;
+    margin-block: 1rem;
+}
+
 .form {
     max-width: 1000px;
     margin: auto;
@@ -106,7 +111,7 @@
     border-color: var(--red);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     .control, .checkscontrol, .switch {
         display: flex;
         flex-wrap: wrap;

@@ -4,14 +4,14 @@
     margin-inline: auto;
 }
 
-input.input {
+.input {
     width: 100%;
     border: 1px solid white;
     color: white;
     display: block;
 }
 
-input.input option {
+.input option {
     color: black;
 }
 

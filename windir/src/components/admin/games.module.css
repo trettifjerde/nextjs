@@ -1,11 +1,13 @@
 .cont, .entry {
     overflow-x: hidden;
+    position: relative;
 }
 
 .entry {
     display: grid;
     grid-template-columns: 1fr 3fr;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .game {

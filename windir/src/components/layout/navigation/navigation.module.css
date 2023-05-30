@@ -94,6 +94,8 @@
 }
 
 @media (max-width: 850px) {
+
+    .list li {border-radius: 0;}
     .list li, .dark .list li, .list li.nav-btn, .dark .list li.nav-btn {
         height: 4rem;
         line-height: 4rem;
@@ -120,8 +122,13 @@
     .menu.list li {
         width: 100%;
         text-align: center;
-        border-top: 1px solid white;
     }
+
+    .menu.list li {
+        border-bottom: 1px solid white;
+    }
+
+    .list.menu {border-top: 1px solid white}
 
     .dark.nav, .dark .menu {
         background-image: none;

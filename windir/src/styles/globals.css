@@ -74,7 +74,6 @@ button.btn:disabled, button.btn:disabled:hover {
 }
 
 .input, .textarea {
-    border: 1px solid var(--dark);
     border-radius: 5px;
     background-color: transparent;
     margin: 0.5rem auto;
@@ -107,7 +106,6 @@ button.btn:disabled, button.btn:disabled:hover {
 .error-text {
   color: var(--red);
   font-size: 16px;
-  margin-block: 1rem;
 }
 
 .img-cont {

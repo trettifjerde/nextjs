@@ -120,7 +120,7 @@ export default function UserEditForm({visible, toggleModal}: {visible: boolean, 
         checkNameStatus();
     }, [setNameRes]);
 
-    return <Modal visible={visible} toggleModal={toggleModal} modalId='modal'>
+    return <Modal visible={visible} toggleModal={toggleModal}>
             <form onSubmit={handleUsernameSubmit}>
                 <div className={classes.head}>
                     <div>Позывной</div>

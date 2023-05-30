@@ -11,7 +11,7 @@ for (let i = 0; i < 7; i++) {
 export default function GameDateEntryForm({game, toggleForm, handleSubmit}: {
     game?: AdminPanelGame,
     toggleForm: () => void,
-    handleSubmit: (btn: HTMLButtonElement, data: AdminPanelGame) => void
+    handleSubmit: (data: AdminPanelGame) => void
 }) {
 
     const selectRef = useRef<HTMLSelectElement>(null);
@@ -34,7 +34,7 @@ export default function GameDateEntryForm({game, toggleForm, handleSubmit}: {
         return minutes.map(minute => <option key={minute}>{minute}</option>)
     }, []);
 
-    const submitForm = useCallback((e: MouseEvent) => {
+    const submitForm = useCallback(() => {
         if (selectRef.current && hoursRef.current && minutesRef.current && imageRef.current) {
             
             const data: AdminPanelGame = {
@@ -44,7 +44,7 @@ export default function GameDateEntryForm({game, toggleForm, handleSubmit}: {
                 image: imageRef.current.value.trim()
             };
 
-            handleSubmit((e.target as HTMLButtonElement), data);
+            handleSubmit(data);
         }
     }, [selectRef, hoursRef, minutesRef, imageRef, handleSubmit]);
 
